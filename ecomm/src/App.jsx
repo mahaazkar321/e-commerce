@@ -1,10 +1,10 @@
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
-import './assets/css/style.css';
 import MainLayout from './components/MainLayout';
-import HomePage from './pages/HomePage.jsx';
+import HomePage from './pages/HomePage';
 import Contact from './pages/Contact.jsx';
 import About from './pages/About.jsx';
 import SignUp from './pages/SignUp.jsx';
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<MainLayout />}>

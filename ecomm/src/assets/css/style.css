@@ -1881,7 +1881,6 @@ pre code {
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #f8f9fa;
   border-radius: 0;
@@ -3341,6 +3340,7 @@ input[type="button"].btn-block {
   flex-wrap: wrap;
   align-items: stretch;
   width: 100%;
+  background-color: #f8f9fa;
 }
 
 .input-group > .form-control,
