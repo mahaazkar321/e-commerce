@@ -1,12 +1,22 @@
-import Navbar from "./Navbar"
-import Footer from "./Footer"
-const MainLayout = () => {
-  return (
-    <div>
-      <Navbar/>
-      <Footer/>
-    </div>
-  )
-}
+import React from 'react';
+import Footer from './Footer';
+import Navbar from './Navbar';
+import { Outlet } from 'react-router-dom';
 
-export default MainLayout
+const MainLayout = () => {
+  console.log("Rendering Header component");
+
+  return (
+    <>
+    <Navbar/>
+    
+      <main>
+        <Outlet /> {/* This is where nested routes (like HomePage) will be rendered */}
+      </main>
+      
+      <Footer />
+    </>
+  );
+};
+
+export default MainLayout;

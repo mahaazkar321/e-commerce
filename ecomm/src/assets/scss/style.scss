@@ -1,6 +1,6 @@
 /******* Bootstrap Theming ********/
 
-$primary: #D19C97;
+$primary: #000000;
 $secondary: #EDF1FF;
 $light: #FFFFFF;
 $dark: #1C1C1C;
@@ -63,7 +63,7 @@ $input-placeholder-color: #999999;
 
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .nav-link.active {
-    color: $primary;
+    color: #000000;
 }
 
 @media (max-width: 991.98px) {
