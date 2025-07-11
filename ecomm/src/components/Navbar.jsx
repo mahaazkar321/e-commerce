@@ -1,4 +1,4 @@
-import { HashLink as Link } from 'react-router-hash-link';
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import '../assets/css/Navbar.css';
 import { FaSearch, FaRegHeart, FaShoppingCart } from 'react-icons/fa';
