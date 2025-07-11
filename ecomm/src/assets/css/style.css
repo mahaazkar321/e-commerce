@@ -19,7 +19,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #D19C97;
+  --primary: #000000;
   --secondary: #EDF1FF;
   --success: #28a745;
   --info: #17a2b8;
@@ -1883,7 +1883,7 @@ pre code {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #EDF1FF;
+  border: 1px solid #f8f9fa;
   border-radius: 0;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -1906,8 +1906,6 @@ pre code {
 
 .form-control:focus {
   color: #495057;
-  background-color: #fff;
-  border-color: #f8f0ef;
   outline: 0;
   box-shadow: none;
 }
@@ -3417,24 +3415,7 @@ input[type="button"].btn-block {
   margin-right: -1px;
 }
 
-.input-group-append {
-  margin-left: -1px;
-}
 
-.input-group-text {
-  display: flex;
-  align-items: center;
-  padding: 0.375rem 0.75rem;
-  margin-bottom: 0;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #495057;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #e9ecef;
-  border: 1px solid #EDF1FF;
-}
 
 .input-group-text input[type="radio"],
 .input-group-text input[type="checkbox"] {
@@ -3928,10 +3909,12 @@ input[type="button"].btn-block {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
+  color: #000000;
 }
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
+  color: #000000;
 }
 
 .nav-link.disabled {
@@ -9264,11 +9247,11 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #D19C97 !important;
+  color: #000000 !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
-  color: #ba6a62 !important;
+  color: #000000 !important;
 }
 
 .text-secondary {

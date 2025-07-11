@@ -1,0 +1,154 @@
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  flex-wrap: wrap;
+  position: relative;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+  flex: 1;
+}
+
+.logo-container h1 {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.nav-links-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+.nav-links li {
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 5px; /* ensures space for underline */
+}
+
+.nav-links .active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 5px; /* changed from 5px to 0 */
+  width: 100%;
+  height: 1px;
+  background-color: black;
+}
+
+.search-container {
+  flex: 1;
+  margin: 0 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.form-control {
+  flex: 1;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+}
+
+.input-group-append {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+}
+
+.icon-container {
+  display: flex;
+  gap: 15px;
+}
+
+.mobile-menu-btn {
+  display: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Mobile styles */
+@media (max-width: 992px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .nav-links-container {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 0;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+ .nav-links .active::after {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -2px;
+    width: 20%; /* smaller underline */
+  }
+  .nav-links-container.mobile-menu-open {
+    display: flex;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .search-container {
+    width: 90%;
+    margin: 0 auto 15px;
+  }
+
+  .icon-container {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (min-width: 993px) {
+  .nav-links-container {
+    display: flex !important;
+    flex-direction: row;
+    width: auto;
+    flex: 2;
+  }
+
+  .search-container {
+    max-width: 400px;
+  }
+}
