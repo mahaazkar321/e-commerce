@@ -1,0 +1,21 @@
+.best-selling-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 30px;
+}
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
+.today-text {
+  color: #DB4444;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+}
+.flash-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
