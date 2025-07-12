@@ -123,7 +123,7 @@ const FlashSales = () => {
           }}>
             <p className="today-text" style={{
               marginLeft: '30px', 
-              marginTop: '5px'
+              marginTop: '8px'
             }}>Today's</p>
           </span>
           <br/>
