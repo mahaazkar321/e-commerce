@@ -12,6 +12,8 @@ import About from './pages/About';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import WishList from './pages/WishList';
+import Cart from './pages/Cart';
+import CheckOut from './pages/CheckOut';
 import ErrorPage from './pages/ErrorPage'; // Create this new component
 
 const router = createBrowserRouter(
@@ -27,6 +29,8 @@ const router = createBrowserRouter(
       <Route path='sign-up' element={<SignUp />} />
       <Route path='log-in' element={<LogIn/>}/> 
       <Route path='wish-list' element={<WishList/>}/> 
+      <Route path='cart' element={<Cart/>}/> 
+      <Route path='check-out' element={<CheckOut/>}/> 
     </Route>
   )
 );

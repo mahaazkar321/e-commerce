@@ -50,7 +50,7 @@ const Navbar = () => {
                 <div className="search-container">
                     <form action="">
                         <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Search for products" style={{backgroundColor:'f8f9fa'}}/>
+                            <input type="text" className="form-control" placeholder="Search for products" style={{ backgroundColor: 'f8f9fa' }} />
                             <div className="input-group-append">
                                 <span className="input-group-text bg-transparent text-primary">
                                     <FaSearch />
@@ -61,13 +61,14 @@ const Navbar = () => {
                 </div>
 
                 <div className="icon-container">
-                    <a href="" className="btn">
+                    <Link to="/wish-list" className="btn">
                         <FaRegHeart className="text-primary" />
-                    </a>
-                    <a href="" className="btn">
+                    </Link>
+                    <Link to="/cart" className="btn">
                         <FaShoppingCart className="text-primary" />
-                    </a>
+                    </Link>
                 </div>
+
             </div>
         </div>
     );

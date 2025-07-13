@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <div style={{
@@ -66,7 +67,7 @@ const Footer = () => {
             <li style={{ marginBottom: '8px' }}>My Account</li>
             <li style={{ marginBottom: '8px' }}>Login / Register</li>
             <li style={{ marginBottom: '8px' }}>Cart</li>
-            <li style={{ marginBottom: '8px' }}>Wishlist</li>
+            <li style={{ marginBottom: '8px' }}><Link to="/wish-list">Wishlist</Link></li>
             <li style={{ marginBottom: '8px' }}>Shop</li>
           </ul>
         </div>
