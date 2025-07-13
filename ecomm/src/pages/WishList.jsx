@@ -1,9 +1,11 @@
-import React from 'react'
+import Wishlist from "../components/WishList/WishList"
+import JustForYou from "../components/WishList/JustForYou"
 
 const WishList = () => {
   return (
     <div>
-      WishList Page
+      <Wishlist/>
+      <JustForYou/>
     </div>
   )
 }
