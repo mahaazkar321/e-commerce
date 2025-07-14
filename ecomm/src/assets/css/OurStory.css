@@ -1,0 +1,64 @@
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 150px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  padding: 30px 15px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+.stat-card h3 {
+  font-size: 20px;
+  margin: 15px 0 5px;
+  color: black;
+}
+
+.stat-card p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.icon-box {
+  background-color: #000;
+  color: white;
+  font-size: 24px;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-card.active {
+  background-color: #db4444;
+  color: white;
+}
+
+.stat-card.active h3,
+.stat-card.active p {
+  color: white;
+}
+
+.stat-card.active .icon-box {
+  background-color: white;
+  color: #db4444;
+}
+
+.white-bg {
+  background-color: white !important;
+  color: #db4444 !important;
+}
