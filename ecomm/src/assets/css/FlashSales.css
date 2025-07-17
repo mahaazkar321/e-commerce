@@ -277,12 +277,12 @@
   color: white;
 }
 
-.view-all {
+.views-all {
   display: flex;
   justify-content: center;
 }
 
-.view-all-btn {
+.views-all-btn {
   background: #DB4444;
   color: white;
   border: none;
@@ -293,6 +293,6 @@
   transition: all 0.3s ease;
 }
 
-.view-all-btn:hover {
+.views-all-btn:hover {
   background: #c03939;
 }

@@ -207,8 +207,8 @@ const FlashSales = () => {
         </div>
       </div>
 
-      <div className="view-all">
-        <button className="view-all-btn">View All Products</button>
+      <div className="views-all">
+        <button className="views-all-btn">View All Products</button>
       </div>
     </div>
   );

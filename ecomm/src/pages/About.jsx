@@ -6,13 +6,8 @@ import Team from '../components/About/Team'
 const About = () => {
   return (
     <div>
-
-      About
        <OurStory/>
       <Team/>
-
-     
-
     </div>
   )
 }
