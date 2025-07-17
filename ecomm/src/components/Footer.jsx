@@ -66,7 +66,7 @@ const Footer = () => {
           <ul style={{ listStyle: 'none', padding: 0 }}>
             <li style={{ marginBottom: '8px' }}>My Account</li>
             <li style={{ marginBottom: '8px' }}>Login / Register</li>
-            <li style={{ marginBottom: '8px' }}>Cart</li>
+            <li style={{ marginBottom: '8px' }}><Link to="/cart">Cart</Link></li>
             <li style={{ marginBottom: '8px' }}><Link to="/wish-list">Wishlist</Link></li>
             <li style={{ marginBottom: '8px' }}>Shop</li>
           </ul>
