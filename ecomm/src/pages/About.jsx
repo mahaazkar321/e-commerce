@@ -8,9 +8,10 @@ const About = () => {
     <div>
 
       About
+       <OurStory/>
       <Team/>
 
-      <OurStory/>
+     
 
     </div>
   )

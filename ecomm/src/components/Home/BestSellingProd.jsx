@@ -2,17 +2,12 @@ import React from 'react';
 import { FaStar, FaRegStar, FaArrowRight } from 'react-icons/fa';
 import '../../assets/css/BestSellingProd.css';
 import speaker from '../../assets/img/Speaker.jpg'
-import jacket from '../../assets/img/jacket.png'
-import bag from '../../assets/img/bag.png'
-import gpu from '../../assets/img/gpu.png'
-import bookshelf from '../../assets/img/bookshelf.png'
 
 const BestSellingProd = () => {
   const products = [
     {
       id: 1,
       name: "The north coat",
-      image:jacket,
       currentPrice: "$260",
       oldPrice: "$360",
       rating: 68,
@@ -21,7 +16,6 @@ const BestSellingProd = () => {
     {
       id: 2,
       name: "Gucci duffle bag",
-      image:bag,
       currentPrice: "$960",
       oldPrice: "$160",
       rating: 68,
@@ -30,7 +24,6 @@ const BestSellingProd = () => {
     {
       id: 3,
       name: "RGB liquid CPU Cooler",
-      image:gpu,
       currentPrice: "$160",
       oldPrice: "$170",
       rating: 68,
@@ -39,7 +32,6 @@ const BestSellingProd = () => {
     {
       id: 4,
       name: "Small BookSelf",
-      image:bookshelf,
       currentPrice: "$360",
       rating: 68,
       stars: 5
@@ -76,8 +68,6 @@ const BestSellingProd = () => {
         {products.map((product) => (
           <div key={product.id} className="product-card">
             <div className="product-image-placeholder"></div>
-            <img src={product.image} alt={product.name} className="product-image" />
-            <button className="add-to-cart">Add To Cart</button>
             <div className="product-details">
               <h3 className="product-name">{product.name}</h3>
               <div className="price-container">
