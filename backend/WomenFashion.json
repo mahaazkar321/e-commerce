@@ -1,0 +1,59 @@
+[
+    {
+    "id":"1",
+  "name": "Sun Glasses",
+  "description": "Stylish Glasses for woman",
+  "price": 2500,
+  "category": "Woman's Fashion",
+  "images": ["/uploads/women/glasses.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": false
+},
+{
+    "id":"2",
+  "name": "Heals",
+  "description": "Stylish Heals for woman",
+  "price": 5000,
+  "category": "Woman's Fashion",
+  "images": ["/uploads/women/shoes.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},
+{
+    "id":"3",
+  "name": "Rings",
+  "description": "Stylish Rings for woman",
+  "price": 1000,
+  "category": "Woman's Fashion",
+  "images": ["/uploads/women/rings.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},
+{
+    "id":"4",
+  "name": "Makeup",
+  "description": "Makeup Products for woman",
+  "price": 5000,
+  "category": "Woman's Fashion",
+  "images": ["/uploads/women/makeup.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},
+{
+    "id":"5",
+  "name": "Frock",
+  "description": "Stylish Frock for woman",
+  "price": 3000,
+  "category": "Woman's Fashion",
+  "images": ["/uploads/women/dress.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+}
+
+
+]
