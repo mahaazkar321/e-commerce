@@ -12,22 +12,8 @@ const Sidebar = () => {
             <br/><br/>
             <nav className="collapse show navbar navbar-vertical navbar-light align-items-start p-0 " id="navbar-vertical">
               <div className="navbar-nav w-100 overflow-hidden" style={{height: "410px"}}>
-                <div className="nav-item dropdown">
-                  <a href="#" className="nav-link" data-toggle="dropdown">Woman's Fashion <i className="fa fa-angle-down float-right mt-1"></i></a>
-                  <div className="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                    <a href="" className="dropdown-item">Men's Dresses</a>
-                    <a href="" className="dropdown-item">Women's Dresses</a>
-                    <a href="" className="dropdown-item">Baby's Dresses</a>
-                  </div>
-                </div>
-                <div className="nav-item dropdown">
-                  <a href="#" className="nav-link" data-toggle="dropdown">Men's Fashion <i className="fa fa-angle-down float-right mt-1"></i></a>
-                  <div className="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                    <a href="" className="dropdown-item">Men's Dresses</a>
-                    <a href="" className="dropdown-item">Women's Dresses</a>
-                    <a href="" className="dropdown-item">Baby's Dresses</a>
-                  </div>
-                </div>
+                 <a href="" className="nav-item nav-link">Women's Fashion</a>
+                  <a href="" className="nav-item nav-link">Men's Fashion</a>
                 <a href="" className="nav-item nav-link">Electronics</a>
                 <a href="" className="nav-item nav-link">Home & Lifestyle</a>
                 <a href="" className="nav-item nav-link">Medicine</a>
