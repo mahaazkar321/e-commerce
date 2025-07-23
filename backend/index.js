@@ -1,16 +1,16 @@
-const connectToMongo=require('./db')
-const express = require('express')
-const app = express()
-const port = 3000
+const connectToMongo=require('./config/db')
+const express = require('express');
+const cors = require('cors');
+const womenFashionRoutes = require('./routes/womenFashionRoutes');
+const app = express();
+const PORT = 5000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.use(cors());
+app.use(express.json());
 connectToMongo();
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+app.use('/api/women-fashion', womenFashionRoutes);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
+
