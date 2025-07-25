@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+
 import { useNavigate } from "react-router-dom";
 import "../assets/css/cart.css";
 import monitor from '../assets/img/monitor.png'
@@ -84,7 +86,9 @@ const Cart = () => {
       </div>
 
       <div className="cart-actions">
-        <button className="return-btn">Return To Shop</button>
+<Link to="/">
+  <button className="return-btn mt-3">Return To Shop</button>
+</Link>
 
         <div className="coupon-section">
           <input
@@ -94,9 +98,9 @@ const Cart = () => {
           />
           <button className="apply-btn">Apply Coupon</button>
         </div>
-
-        <button className="update-btn">Update Cart</button>
-      </div>
+<Link to="">
+       <button className="update-btn">Update Cart</button>
+     </Link>  </div>
 
       <div className="cart-total">
         <h2>Cart Total</h2>

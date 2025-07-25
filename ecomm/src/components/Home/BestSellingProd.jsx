@@ -94,9 +94,20 @@ const BestSellingProd = () => {
           
       
     </div>
-    <div>
-          <img src={speaker} alt='speaker' style={{width:'1350px' , height:'500px', marginRight:'50px', margin: '0 auto'}}/>
-        </div>
+   <div style={{ maxWidth: '100%', overflow: 'hidden' }}>
+  <img 
+    src={speaker} 
+    alt="speaker" 
+    style={{ 
+      width: '100%', 
+      height: 'auto', 
+      display: 'block', 
+      objectFit: 'cover',
+      maxHeight: '500px'
+    }} 
+  />
+</div>
+
         </>
   );
 };

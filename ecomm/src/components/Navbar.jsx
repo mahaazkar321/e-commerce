@@ -20,7 +20,7 @@ const Navbar = () => {
     return (
         <div className="navbar-container">
             <div className="logo-container">
-                <a href="" className="text-decoration-none">
+                <a href="/" className="text-decoration-none">
                     <h1 className="m-0 display-5 font-weight-semi-bold">Exclusive</h1>
                 </a>
             </div>
