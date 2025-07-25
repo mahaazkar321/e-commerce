@@ -29,8 +29,7 @@ const Sidebar = () => {
 
                 <a href="" className="nav-item nav-link">Medicine</a>
                 <a href="" className="nav-item nav-link">Sports & Outdoor</a>
-                <a href="" className="nav-item nav-link">Baby's & Toys</a>
-                <a href="" className="nav-item nav-link">Groceries & Pets</a>
+                
                 <a href="" className="nav-item nav-link">Health & Beauty</a>
               </div>
             </nav>
