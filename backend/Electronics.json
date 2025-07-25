@@ -4,8 +4,8 @@
     "name": "SmartWatch",
     "description": "Fitness tracker and smartwatch combo",
     "price": 7000,
-    "category": "Electronics",
-    "images": ["/uploads/Appliance Electronics/smartwatch.jpeg"],
+    "category": "Appliance Electronics",
+    "images": ["/uploads/electronics/smartwatch.jpeg"],
     "stock": 25,
     "ratings": 4.4,
     "isFeatured": false
@@ -15,8 +15,8 @@
     "name": "Wireless Earbuds",
     "description": "Noise-cancelling Bluetooth earbuds",
     "price": 3500,
-    "category": "Electronics",
-    "images": ["/uploads/Appliance Electronics/earbuds.jpeg"],
+    "category": "Appliance Electronics",
+    "images": ["/uploads/electronics/earbuds.jpeg"],
     "stock": 50,
     "ratings": 4.2,
     "isFeatured": true
@@ -24,11 +24,67 @@
   {
     "id": "3",
     "name": "SmartPhone",
-     "description": "Latest model with high-speed processor",
+    "description": "Latest model with high-speed processor",
     "price": 55000,
-    "category": "Electronics",
-    "images": ["/uploads/Appliance Electronics/smartwatch.jpeg"],
+    "category": "Appliance Electronics",
+    "images": ["/uploads/electronics/smartphone.jpg"],
     "stock": 20,
     "ratings": 4.5,
     "isFeatured": true
-  }]
+  },
+  {
+    "id": "4",
+    "name": "Bluetooth Speaker",
+    "description": "Portable speaker with rich bass and long battery life",
+    "price": 4500,
+    "category": "Appliance Electronics",
+    "images": ["/uploads/electronics/speaker.jpg"],
+    "stock": 35,
+    "ratings": 4.3,
+    "isFeatured": false
+  },
+  {
+    "id": "5",
+    "name": "Laptop",
+    "description": "High-performance laptop ideal for work and gaming",
+    "price": 80000,
+    "category": "Appliance Electronics",
+    "images": ["/uploads/electronics/laptop.png"],
+    "stock": 15,
+    "ratings": 4.6,
+    "isFeatured": true
+  },
+  {
+    "id": "6",
+    "name": "Smart TV",
+    "description": "4K UHD Smart TV with streaming support",
+    "price": 45000,
+    "category": "Appliance Electronics",
+    "images": ["/uploads/electronics/smarttv.jpeg"],
+    "stock": 10,
+    "ratings": 4.4,
+    "isFeatured": true
+  },
+  {
+    "id": "7",
+    "name": "Gaming Console",
+    "description": "Next-gen console with immersive graphics",
+    "price": 60000,
+    "category": "Appliance Electronics",
+    "images": ["/uploads/electronics/console.webp"],
+    "stock": 8,
+    "ratings": 4.7,
+    "isFeatured": true
+  },
+  {
+    "id": "8",
+    "name": "Air Purifier",
+    "description": "Removes dust, pollen, and allergens with HEPA filter",
+    "price": 12000,
+    "category": "Appliance Electronics",
+    "images": ["/uploads/electronics/airpurifier.webp"],
+    "stock": 18,
+    "ratings": 4.3,
+    "isFeatured": false
+  }
+]
