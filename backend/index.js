@@ -7,7 +7,11 @@ const path = require('path');
 
 const womenFashionRoutes = require('./routes/womenFashionRoutes');
 
+
 const ElectronicsRoute = require('./routes/ElectronicsRoute');
+
+const MenFashionRoute = require('./routes/MenFashionRoute');
+
 
 const HomeaandLifestyleRoutes = require('./routes/HomeandLifestyleRoutes');
 
@@ -20,7 +24,10 @@ connectToMongo();
 
 app.use('/api/woman-fashion', womenFashionRoutes);
 
+
 app.use('/api/appliance-electronics', ElectronicsRoute);
+
+app.use('/api/men-fashion', MenFashionRoute );
 
 app.use('/api/home-and-lifestyle', HomeaandLifestyleRoutes);
 
