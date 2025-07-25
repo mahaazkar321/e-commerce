@@ -15,6 +15,7 @@ import WishList from './pages/WishList';
 import Cart from './pages/Cart';
 import CheckOut from './pages/CheckOut';
 import ProductDetails from './pages/ProductDetails';
+import ProdCat from './pages/ProdCat';
 import ErrorPage from './pages/ErrorPage'; // Create this new component
 
 const router = createBrowserRouter(
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
       <Route path='cart' element={<Cart/>}/> 
       <Route path='check-out' element={<CheckOut/>}/> 
       <Route path='product-details' element={<ProductDetails/>}/> 
+       <Route path="/category/:categoryName" element={<ProdCat />} />
 
     </Route>
   )
