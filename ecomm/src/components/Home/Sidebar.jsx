@@ -23,7 +23,7 @@ const Sidebar = () => {
 
                    <Link to="/category/men-fashion" className="nav-item nav-link">Men Fashion</Link>
                   
-                <a href="" className="nav-item nav-link">Electronics</a>
+               
 
                 <Link to="/category/home-and-lifestyle" className="nav-item nav-link">Home & Lifestyle</Link>
 
