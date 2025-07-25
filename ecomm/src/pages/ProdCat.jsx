@@ -12,7 +12,7 @@ const ProdCat = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:5000/api/woman-fashion`);
+        const response = await axios.get(`http://localhost:5000/api/${categoryName}`);
         
         const filtered = categoryName
           ? response.data.filter((product) => {
