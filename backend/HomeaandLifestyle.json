@@ -1,0 +1,46 @@
+[
+  {
+    "id": "1",
+    "name": "Chair",
+    "description": "A modern, ergonomic chair designed for comfort and durability — perfect for home or office use.",
+    "price": 25000,
+    "category": "Home and Lifestyle",
+    "images": ["/uploads/homeandlife/chair.jpeg"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": false
+  },
+  {
+    "id": "2",
+    "name": "Curtains",
+    "description": "Elegant and premium-quality curtains that add style and privacy to your living space.",
+    "price": 15000,
+    "category": "Home and Lifestyle",
+    "images": ["/uploads/homeandlife/curtains.webp"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": true
+  },
+  {
+    "id": "3",
+    "name": "Sofa",
+    "description": "Luxurious and spacious sofa with plush cushions, perfect for relaxing and entertaining guests.",
+    "price": 50000,
+    "category": "Home and Lifestyle",
+    "images": ["/uploads/homeandlife/sofa.jpeg"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": true
+  },
+  {
+    "id": "4",
+    "name": "Dinning Table",
+    "description": "A premium 6-seater dining table crafted from fine wood, ideal for family meals and gatherings.",
+    "price": 1000000,
+    "category": "Home and Lifestyle",
+    "images": ["/uploads/homeandlife/dining.jpeg"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": true
+  }
+]
