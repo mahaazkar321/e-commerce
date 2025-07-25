@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "name": "SmartWatch",
+    "description": "Fitness tracker and smartwatch combo",
+    "price": 7000,
+    "category": "Electronics",
+    "images": ["/uploads/electronics/smartwatch.jpeg"],
+    "stock": 25,
+    "ratings": 4.4,
+    "isFeatured": false
+  },
+  {
+    "id": "2",
+    "name": "Wireless Earbuds",
+    "description": "Noise-cancelling Bluetooth earbuds",
+    "price": 3500,
+    "category": "Electronics",
+    "images": ["/uploads/electronics/earbuds.jpeg"],
+    "stock": 50,
+    "ratings": 4.2,
+    "isFeatured": true
+  },
+  {
+    "id": "3",
+    "name": "SmartPhone",
+     "description": "Latest model with high-speed processor",
+    "price": 55000,
+    "category": "Electronics",
+    "images": ["/uploads/electronics/smartwatch.jpeg"],
+    "stock": 20,
+    "ratings": 4.5,
+    "isFeatured": true
+  }]
