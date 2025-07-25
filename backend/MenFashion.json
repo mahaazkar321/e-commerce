@@ -1,0 +1,59 @@
+[
+    {
+    "id":"1",
+  "name": "dress",
+  "description": " Dress for men",
+  "price": 2500,
+  "category": "Men Fashion",
+  "images": ["/uploads/men/dress.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": false
+},
+{
+    "id":"2",
+  "name": "Rings",
+  "description": "Stylish rings for men",
+  "price": 5000,
+  "category": "Men Fashion",
+  "images": ["/uploads/men/rings.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},
+{
+    "id":"3",
+  "name": "Shoes",
+  "description": "Stylish shoes for men",
+  "price": 1000,
+  "category": "Men Fashion",
+  "images": ["/uploads/men/ahoes.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},
+{
+    "id":"4",
+  "name": "watches",
+  "description": "Watches for men",
+  "price": 5000,
+  "category": "Men Fashion",
+  "images": ["/uploads/men/watche.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},
+{
+    "id":"5",
+  "name": "Frock",
+  "description": "Stylish Frock for woman",
+  "price": 3000,
+  "category": "Woman's Fashion",
+  "images": ["/uploads/women/dress.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+}
+
+
+]
