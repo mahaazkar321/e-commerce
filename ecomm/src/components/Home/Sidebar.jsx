@@ -1,5 +1,5 @@
 import '../../assets/css/Sidebar.css'
-import slider1 from '../../assets/img/slider-1.webp'
+import { Link } from 'react-router-dom';
 import slider2 from '../../assets/img/slider-2.jpg'
 
 const Sidebar = () => {
@@ -12,7 +12,7 @@ const Sidebar = () => {
             <br/><br/>
             <nav className="collapse show navbar navbar-vertical navbar-light align-items-start p-0 " id="navbar-vertical">
               <div className="navbar-nav w-100 overflow-hidden" style={{height: "410px"}}>
-                 <a href="" className="nav-item nav-link">Women's Fashion</a>
+                 <Link to="/category/woman-fashion" className="nav-item nav-link">Women's Fashion</Link>
                   <a href="" className="nav-item nav-link">Men's Fashion</a>
                 <a href="" className="nav-item nav-link">Electronics</a>
                 <a href="" className="nav-item nav-link">Home & Lifestyle</a>
