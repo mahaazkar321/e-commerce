@@ -6,6 +6,7 @@ const path = require('path');
 // Add this line before your routes
 
 const womenFashionRoutes = require('./routes/womenFashionRoutes');
+const MedicineRoutes = require('./routes/MedicineRoute');
 
 
 const ElectronicsRoute = require('./routes/ElectronicsRoute');
@@ -30,6 +31,7 @@ app.use('/api/appliance-electronics', ElectronicsRoute);
 app.use('/api/men-fashion', MenFashionRoute );
 
 app.use('/api/home-and-lifestyle', HomeaandLifestyleRoutes);
+app.use('/api/syrup-and-medicine', MedicineRoutes);
 
 
 app.listen(PORT, () => {
