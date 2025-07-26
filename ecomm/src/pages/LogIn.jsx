@@ -1,12 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LogIn = () => {
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
+
+  const handleChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      alert(res.data.message);
+      localStorage.setItem('token', res.data.token);
+      navigate('/');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Login failed');
+    }
+  };
+
   return (
     <div style={styles.container}>
       <h2>Log In</h2>
-      <input type="text" placeholder="Email or Phone Number" style={styles.input} />
-      <input type="password" placeholder="Password" style={styles.input} />
-      <button style={styles.loginBtn}>Log In</button>
+      <input name="email" placeholder="Email" style={styles.input} onChange={handleChange} />
+      <input type="password" name="password" placeholder="Password" style={styles.input} onChange={handleChange} />
+      <button onClick={handleSubmit} style={styles.loginBtn}>Log In</button>
     </div>
   );
 };
