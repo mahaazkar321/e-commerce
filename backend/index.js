@@ -8,6 +8,7 @@ const connectToMongo = require('./config/db');
 // ✅ Connect to MongoDB
 connectToMongo();
 
+// ✅ Create Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -32,7 +33,7 @@ app.use('/api/health-and-beauty', HealthBeauty);
 app.use('/api/home-and-lifestyle', HomeaandLifestyleRoutes);
 app.use('/api/auth', authRoutes); // Signup/Login routes
 
-// ✅ Server Start
+// ✅ Start Server
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
