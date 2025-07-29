@@ -18,6 +18,7 @@ import Cart from './pages/Cart';
 import CheckOut from './pages/CheckOut';
 import ProductDetails from './pages/ProductDetails';
 import ProdCat from './pages/ProdCat';
+import BestSellingProd from './components/Home/BestSellingProd';
 import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter(
@@ -34,6 +35,8 @@ const router = createBrowserRouter(
       <Route path='product-details' element={<ProductDetails />} />
       <Route path="/category/:categoryName" element={<ProdCat />} />
 <Route path="/products/:categoryName/:productId" element={<ProductDetails />} />
+  <Route path="/products/:categoryName" element={<BestSellingProd />} />  {/* ✅ ADD THIS */}
+
     </Route>
   )
 );
