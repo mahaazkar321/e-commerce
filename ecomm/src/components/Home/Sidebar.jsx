@@ -20,16 +20,25 @@ const Sidebar = () => {
               <div className="navbar-nav w-100 overflow-hidden" style={{ height: "410px" }}>
                 <Link to="/category/woman-fashion" className="nav-item nav-link">Women's Fashion</Link>
 
+
                 <Link to="/category/men-fashion" className="nav-item nav-link">Men Fashion</Link>
 
                 <Link to="/category/appliance-electronics" className="nav-item nav-link">Electronics</Link>
 
 
                 <Link to="/category/home-and-lifestyle" className="nav-item nav-link">Home & Lifestyle</Link>
+
+<Link to="/category/sports-and-outdoor" className="nav-item nav-link">Sports & Outdoor</Link>
+                <a href="" className="nav-item nav-link">Medicine</a>
+                
+                
+                <a href="" className="nav-item nav-link">Health & Beauty</a>
+
                 <Link to="/category/syrup-and-medicine" className="nav-item nav-link">Medicine</Link>
                 <a href="" className="nav-item nav-link">Sports & Outdoor</a>
 
                 <Link to="/category/health-and-beauty" className="nav-item nav-link">Health and Beauty</Link>
+
 
               </div>
             </nav>

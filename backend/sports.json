@@ -1,0 +1,37 @@
+[
+    {
+    "id":"1",
+  "name": "football",
+  "description": " football",
+  "price": 2500,
+  "category": "Sports and Outdoor",
+  "images": ["/uploads/sports/football.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": false
+},
+{
+    "id":"2",
+  "name": "hockey",
+  "description": "hockey",
+  "price": 5000,
+  "category": "Sports and Outdoor",
+  "images": ["/uploads/sports/hockey.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},
+{
+    "id":"3",
+  "name": "rackets",
+  "description": "rackets",
+  "price": 1000,
+  "category": "Sports and Outdoor",
+  "images": ["/uploads/sports/rackets.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+}
+
+
+]
