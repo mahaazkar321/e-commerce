@@ -1,9 +1,11 @@
-import { 
-  Route, 
-  createBrowserRouter, 
-  createRoutesFromElements, 
-  RouterProvider,
-  ScrollRestoration
+
+
+// App.jsx
+import {
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider
 } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
 import HomePage from './pages/HomePage';
@@ -16,26 +18,22 @@ import Cart from './pages/Cart';
 import CheckOut from './pages/CheckOut';
 import ProductDetails from './pages/ProductDetails';
 import ProdCat from './pages/ProdCat';
-import ErrorPage from './pages/ErrorPage'; // Create this new component
+import ErrorPage from './pages/ErrorPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route 
-      path="/" 
-      element={<MainLayout />}
-      errorElement={<ErrorPage />} // Add error boundary
-    >
+    <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
       <Route index element={<HomePage />} />
       <Route path='contact' element={<Contact />} />
       <Route path='about' element={<About />} />
       <Route path='sign-up' element={<SignUp />} />
-      <Route path='log-in' element={<LogIn/>}/> 
-      <Route path='wish-list' element={<WishList/>}/> 
-      <Route path='cart' element={<Cart/>}/> 
-      <Route path='check-out' element={<CheckOut/>}/> 
-      <Route path='product-details' element={<ProductDetails/>}/> 
-       <Route path="/category/:categoryName" element={<ProdCat />} />
-
+      <Route path='log-in' element={<LogIn />} />
+      <Route path='wish-list' element={<WishList />} />
+      <Route path='cart' element={<Cart />} />
+      <Route path='check-out' element={<CheckOut />} />
+      <Route path='product-details' element={<ProductDetails />} />
+      <Route path="/category/:categoryName" element={<ProdCat />} />
+<Route path="/products/:categoryName/:productId" element={<ProductDetails />} />
     </Route>
   )
 );

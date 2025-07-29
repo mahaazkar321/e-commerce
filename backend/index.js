@@ -41,7 +41,6 @@ app.use('/api/syrup-and-medicine', MedicineRoutes);
 app.use('/api/auth', authRoutes); // Signup/Login routes
 
 
-// ✅ Server Start
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
