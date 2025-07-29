@@ -5,10 +5,14 @@ require('dotenv').config();
 
 const connectToMongo = require('./config/db');
 
+
+const womenFashionRoutes = require('./routes/womenFashionRoutes');
+const MedicineRoutes = require('./routes/MedicineRoute');
+
 // ✅ Connect to MongoDB
 connectToMongo();
 
-// ✅ Create Express app
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -31,9 +35,12 @@ app.use('/api/appliance-electronics', ElectronicsRoute);
 app.use('/api/men-fashion', MenFashionRoute);
 app.use('/api/health-and-beauty', HealthBeauty);
 app.use('/api/home-and-lifestyle', HomeaandLifestyleRoutes);
+
+app.use('/api/syrup-and-medicine', MedicineRoutes);
+
 app.use('/api/auth', authRoutes); // Signup/Login routes
 
-// ✅ Start Server
+
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });

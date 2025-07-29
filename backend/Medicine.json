@@ -1,0 +1,57 @@
+[
+  {
+    "id": "1",
+    "name": "Risek Capsule",
+    "description": "Risek Capsule is used to treat acid-related stomach issues such as heartburn, GERD, and ulcers by reducing acid production.",
+    "price": 2500,
+    "category": "Syrup and Medicine",
+    "images": ["/uploads/medicine/risek.jfif"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": false
+  },
+  {
+    "id": "2",
+    "name": "Brufen",
+    "description": "Brufen is a pain reliever and anti-inflammatory medicine commonly used for headaches, muscle pain, and arthritis.",
+    "price": 5000,
+    "category": "Syrup and Medicine",
+    "images": ["/uploads/medicine/brufen.webp"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": true
+  },
+  {
+    "id": "3",
+    "name": "Hydrylin",
+    "description": "Hydrylin is a cough syrup used for relieving symptoms of cold, flu, and allergy such as sneezing, runny nose, and throat irritation.",
+    "price": 1000,
+    "category": "Syrup and Medicine",
+    "images": ["/uploads/medicine/hydrylin.jpg"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": true
+  },
+  {
+    "id": "4",
+    "name": "Panadol",
+    "description": "Panadol is a widely used over-the-counter medication for pain relief and fever reduction. It is effective for headaches, toothaches, and flu symptoms.",
+    "price": 5000,
+    "category": "Syrup and Medicine",
+    "images": ["/uploads/medicine/panadol.jpg"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": true
+  },
+  {
+    "id": "5",
+    "name": "Frock",
+    "description": "Stylish frock for women, perfect for formal and casual occasions with a comfortable and elegant design.",
+    "price": 3000,
+    "category": "Women's Fashion",
+    "images": ["/uploads/women/dress.jpeg"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": true
+  }
+]
