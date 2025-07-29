@@ -11,7 +11,7 @@ const womenFashionRoutes = require('./routes/womenFashionRoutes');
 const ElectronicsRoute = require('./routes/ElectronicsRoute');
 
 const MenFashionRoute = require('./routes/MenFashionRoute');
-
+const sportsRoute = require('./routes/sportsRoute');
 
 const HomeaandLifestyleRoutes = require('./routes/HomeandLifestyleRoutes');
 
@@ -30,7 +30,7 @@ app.use('/api/appliance-electronics', ElectronicsRoute);
 app.use('/api/men-fashion', MenFashionRoute );
 
 app.use('/api/home-and-lifestyle', HomeaandLifestyleRoutes);
-
+app.use('/api/sports-and-outdoor', sportsRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

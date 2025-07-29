@@ -14,7 +14,7 @@ const Sidebar = () => {
               <div className="navbar-nav w-100 overflow-hidden" style={{height: "410px"}}>
                  <Link to="/category/woman-fashion" className="nav-item nav-link">Women's Fashion</Link>
 
-                  <a href="" className="nav-item nav-link">Men's Fashion</a>
+                 
 
                  <Link to="/category/appliance-electronics" className="nav-item nav-link">Electronics</Link>
                
@@ -26,9 +26,9 @@ const Sidebar = () => {
                 <a href="" className="nav-item nav-link">Electronics</a>
 
                 <Link to="/category/home-and-lifestyle" className="nav-item nav-link">Home & Lifestyle</Link>
-
+<Link to="/category/sports-and-outdoor" className="nav-item nav-link">Sports & Outdoor</Link>
                 <a href="" className="nav-item nav-link">Medicine</a>
-                <a href="" className="nav-item nav-link">Sports & Outdoor</a>
+                
                 
                 <a href="" className="nav-item nav-link">Health & Beauty</a>
               </div>
