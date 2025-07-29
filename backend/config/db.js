@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
+require('dotenv').config(); // <-- required to read .env
 
-const mongoURI = "mongodb://localhost:27017/Ecommerce";
+const mongoURI = process.env.MONGO_URI;
 
 const connectToMongo = async () => {
   try {
-    await mongoose.connect(mongoURI);
-    console.log("Connected to Mongo Successfully");
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ Connected to MongoDB successfully");
   } catch (error) {
-    console.error("MongoDB connection error:", error);
-    process.exit(1); // optional: stop server if DB fails
+    console.error("❌ MongoDB connection failed:", error.message);
+    process.exit(1);
   }
 };
 

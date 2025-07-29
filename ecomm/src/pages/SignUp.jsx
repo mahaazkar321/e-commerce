@@ -1,57 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-const SignUp = () => {
-  const navigate = useNavigate();
-
-  const handleLoginRedirect = () => {
-    navigate('/log-in'); // Fixed path
-  };
-
-  return (
-    <div style={styles.container}>
-      {/* Left Section (Image) */}
-      <div style={styles.imageSection}>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/891/891419.png"
-          alt="E-commerce"
-          style={styles.image}
-        />
-      </div>
-
-      {/* Right Section (Form) */}
-      <div style={styles.formSection}>
-        <h2>Create an account</h2>
-        <p>Enter your details below</p>
-
-        <input type="text" placeholder="Name" style={styles.input} />
-        <input type="text" placeholder="Email or Phone Number" style={styles.input} />
-        <input type="password" placeholder="Password" style={styles.input} />
-
-        <button style={styles.createAccountBtn}>Create Account</button>
-
-        <button style={styles.googleBtn}>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/2972/2972431.png"
-            alt="Google"
-            style={styles.googleIcon}
-          />
-          Sign up with Google
-        </button>
-
-        <p style={styles.loginText}>
-          Already have an account?{' '}
-          <span onClick={handleLoginRedirect} style={styles.loginLink}>
-            Log in
-          </span>
-        </p>
-      </div>
-    </div>
-  );
-};
-
-
-// Inline styles
 const styles = {
   container: {
     display: 'flex',
@@ -119,6 +69,87 @@ const styles = {
     cursor: 'pointer',
     fontWeight: 'bold',
   },
+};
+
+const SignUp = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = async () => {
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/signup', formData);
+      alert(res.data.message);
+      navigate('/log-in');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Signup failed');
+    }
+  };
+
+  return (
+    <div style={styles.container}>
+      <div style={styles.imageSection}>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/891/891419.png"
+          alt="E-commerce"
+          style={styles.image}
+        />
+      </div>
+
+      <div style={styles.formSection}>
+        <h2>Create an account</h2>
+        <p>Enter your details below</p>
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          style={styles.input}
+          onChange={handleChange}
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          style={styles.input}
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          style={styles.input}
+          onChange={handleChange}
+        />
+
+        <button style={styles.createAccountBtn} onClick={handleSubmit}>
+          Create Account
+        </button>
+
+        <button style={styles.googleBtn}>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2972/2972431.png"
+            alt="Google"
+            style={styles.googleIcon}
+          />
+          Sign up with Google
+        </button>
+
+        <p style={styles.loginText}>
+          Already have an account?{' '}
+          <span onClick={() => navigate('/log-in')} style={styles.loginLink}>
+            Log in
+          </span>
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default SignUp;

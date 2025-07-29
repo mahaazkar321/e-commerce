@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
 
 const ProdCat = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { categoryName } = useParams();
+   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -16,12 +17,7 @@ const ProdCat = () => {
         
         const filtered = categoryName
           ? response.data.filter((product) => {
-              // Normalize both strings for comparison
-              const dbCategory = product.category 
-                ? product.category.toLowerCase()
-                      
-                      .replace(/\s+/g, '-')    // Replace spaces with hyphens
-                : '';
+            const dbCategory = product.category ? product.category.toLowerCase().replace(/\s+/g, '-') : '';
               const urlCategory = categoryName.toLowerCase();
               return dbCategory === urlCategory;
             })
@@ -88,7 +84,7 @@ const ProdCat = () => {
         fontSize: '2rem',
         color: '#333'
       }}>
-        {categoryName ? `${categoryName.replace(/-/g, ' ')} Products` : 'Explore Our Products'}
+        {categoryName ?` ${categoryName.replace(/-/g, ' ')} Products` : 'Explore Our Products'}
       </h1>
 
       <div style={{
@@ -119,7 +115,7 @@ const ProdCat = () => {
               <img
                 src={
                   product.images?.[0] 
-                    ? `http://localhost:5000${product.images[0]}` 
+                    ? `http://localhost:5000${product.images[0]} `
                     : 'https://via.placeholder.com/300x400?text=No+Image'
                 }
                 alt={product.name}
@@ -163,7 +159,7 @@ const ProdCat = () => {
               }}>
                 ${product.price}
               </p>
-              <button style={{
+              <button onClick={() => navigate(`/products/${categoryName}/${product._id}`)} style={{
                 width: '100%',
                 padding: '0.5rem',
                 backgroundColor: '#333',

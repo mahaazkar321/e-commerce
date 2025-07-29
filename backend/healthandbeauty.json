@@ -1,0 +1,90 @@
+[
+  {
+    "id": "1",
+    "name": "Herbal Face Wash",
+    "description": "Gentle and natural face wash enriched with neem and aloe vera to cleanse and refresh your skin.",
+    "price": 5000,
+    "category": "Health and Beauty",
+    "images": ["/uploads/healthbeauty/facewash.webp"],
+    "stock": 50,
+    "ratings": 4.5,
+    "isFeatured": true
+  },
+  {
+    "id": "2",
+    "name": "Organic Shampoo",
+    "description": "Sulphate-free shampoo that strengthens hair and promotes healthy scalp with natural ingredients.",
+    "price": 7000,
+    "category": "Health and Beauty",
+    "images": ["/uploads/healthbeauty/shampo.webp"],
+    "stock": 40,
+    "ratings": 4.2,
+    "isFeatured": false
+  },
+  {
+    "id": "3",
+    "name": "Body Lotion",
+    "description": "Moisturizing body lotion with shea butter and vitamin E for soft, nourished skin all day long.",
+    "price": 6500,
+    "category": "Health and Beauty",
+    "images": ["/uploads/healthbeauty/bodylotion.jpeg"],
+    "stock": 60,
+    "ratings": 4.4,
+    "isFeatured": true
+  },
+  {
+    "id": "4",
+    "name": "Sunscreen SPF 50",
+    "description": "Broad-spectrum sunscreen with SPF 50 that protects against UVA and UVB rays without greasiness.",
+    "price": 8000,
+    "category": "Health and Beauty",
+    "images": ["/uploads/healthbeauty/sunscreen.jpeg"],
+    "stock": 70,
+    "ratings": 4.6,
+    "isFeatured": true
+  },
+  {
+    "id": "5",
+    "name": "Essential Oils Set",
+    "description": "Set of 6 pure essential oils for aromatherapy, massage, and natural skin care routines.",
+    "price": 12000,
+    "category": "Health and Beauty",
+    "images": ["/uploads/healthbeauty/essentialoils.jpeg"],
+    "stock": 30,
+    "ratings": 4.7,
+    "isFeatured": false
+  },
+  {
+    "id": "6",
+    "name": "Electric Facial Cleanser",
+    "description": "Rechargeable facial cleansing brush for deep pore cleaning, exfoliation, and smooth skin.",
+    "price": 20000,
+    "category": "Health and Beauty",
+    "images": ["/uploads/healthbeauty/facialcleanser.jpeg"],
+    "stock": 25,
+    "ratings": 4.5,
+    "isFeatured": true
+  },
+  {
+    "id": "7",
+    "name": "Hair Dryer",
+    "description": "Compact and powerful hair dryer with multiple heat settings and cool shot for professional styling.",
+    "price": 30000,
+    "category": "Health and Beauty",
+    "images": ["/uploads/healthbeauty/hairdryer.webp"],
+    "stock": 35,
+    "ratings": 4.3,
+    "isFeatured": false
+  },
+  {
+    "id": "8",
+    "name": "Vitamin C Serum",
+    "description": "Brightening serum with vitamin C and hyaluronic acid for radiant, youthful skin.",
+    "price": 9500,
+    "category": "Health and Beauty",
+    "images": ["/uploads/healthbeauty/vitamincserum.webp"],
+    "stock": 45,
+    "ratings": 4.8,
+    "isFeatured": true
+  }
+]
