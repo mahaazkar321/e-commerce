@@ -1,0 +1,103 @@
+[{
+  "id": "1",
+  "name": "Curtains",
+  "description": "Elegant and premium-quality curtains that add style and privacy to your living space.",
+  "price": 15000,
+  "category": "Home and Lifestyle",
+  "images": [
+    "/uploads/homeandlife/curtains.webp"
+  ],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+}
+,
+
+{
+    "id":"2",
+  "name": "rackets",
+  "description": "rackets",
+  "price": 1000,
+  "category": "Sports and Outdoor",
+  "images": ["/uploads/sports/rackets.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},{
+    "id":"3",
+  "name": "watches",
+  "description": "Watches for men",
+  "price": 5000,
+  "category": "Men Fashion",
+  "images": ["/uploads/men/watche.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},{
+    "id":"4",
+  "name": "Heals",
+  "description": "Stylish Heals for woman",
+  "price": 5000,
+  "category": "Woman's Fashion",
+  "images": ["/uploads/women/shoes.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},
+{
+    "id":"5",
+  "name": "Rings",
+  "description": "Stylish Rings for woman",
+  "price": 1000,
+  "category": "Woman's Fashion",
+  "images": ["/uploads/women/rings.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+},
+{
+    "id":"6",
+  "name": "Makeup",
+  "description": "Makeup Products for woman",
+  "price": 5000,
+  "category": "Woman's Fashion",
+  "images": ["/uploads/women/makeup.jpeg"],
+  "stock": 30,
+  "ratings": 4.3,
+  "isFeatured": true
+}
+,
+  {
+    "id": "7",
+    "name": "Air Purifier",
+    "description": "Removes dust, pollen, and allergens with HEPA filter",
+    "price": 12000,
+    "category": "Appliance Electronics",
+    "images": ["/uploads/electronics/airpurifier.webp"],
+    "stock": 18,
+    "ratings": 4.3,
+    "isFeatured": false
+  },
+   {
+    "id": "8",
+    "name": "Hair Dryer",
+    "description": "Compact and powerful hair dryer with multiple heat settings and cool shot for professional styling.",
+    "price": 30000,
+    "category": "Health and Beauty",
+    "images": ["/uploads/healthbeauty/hairdryer.webp"],
+    "stock": 35,
+    "ratings": 4.3,
+    "isFeatured": false
+  },
+   {
+    "id": "9",
+    "name": "Panadol",
+    "description": "Panadol is a widely used over-the-counter medication for pain relief and fever reduction. It is effective for headaches, toothaches, and flu symptoms.",
+    "price": 5000,
+    "category": "Syrup and Medicine",
+    "images": ["/uploads/medicine/panadol.jpg"],
+    "stock": 30,
+    "ratings": 4.3,
+    "isFeatured": true
+  }
+]
