@@ -1,95 +1,58 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "../../assets/css/FlashSales.css";
 import { FaRegHeart, FaHeart, FaStar, FaEye } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import gamepad from "../../assets/img/gamepad.png";
-import keyboard from "../../assets/img/keyboard.png";
-import monitor from "../../assets/img/monitor.png";
-import chair from "../../assets/img/chair.png";
+import axios from "axios";
 
 const FlashSales = () => {
-  const products = [
-    {
-      id: 1,
-      name: "HAVIT HV-982 Gamepad",
-      price: "$120",
-      oldPrice: "$160",
-      discount: "-40%",
-      rating: 89,
-      image: gamepad,
-    },
-    {
-      id: 2,
-      name: "AK-900 Wired Keyboard",
-      price: "$860",
-      oldPrice: "$1500",
-      discount: "-35%",
-      rating: 79,
-      image: keyboard,
-    },
-    {
-      id: 3,
-      name: "IPS LCD Gaming Monitor",
-      price: "$370",
-      oldPrice: "$400",
-      discount: "-30%",
-      rating: 99,
-      image: monitor,
-    },
-    {
-      id: 4,
-      name: "3-Series Comfort Chair",
-      price: "$375",
-      oldPrice: "$400",
-      discount: "-25%",
-      rating: 45,
-      image: chair,
-    },
-    {
-      id: 5,
-      name: "HAVIT HV-982 Gamepad",
-      price: "$120",
-      oldPrice: "$160",
-      discount: "-40%",
-      rating: 89,
-      image: gamepad,
-    },
-    {
-      id: 6,
-      name: "AK-900 Wired Keyboard",
-      price: "$860",
-      oldPrice: "$1500",
-      discount: "-35%",
-      rating: 79,
-      image: keyboard,
-    },
-    {
-      id: 7,
-      name: "IPS LCD Gaming Monitor",
-      price: "$370",
-      oldPrice: "$400",
-      discount: "-30%",
-      rating: 99,
-      image: monitor,
-    },
-    {
-      id: 8,
-      name: "3-Series Comfort Chair",
-      price: "$375",
-      oldPrice: "$400",
-      discount: "-25%",
-      rating: 45,
-      image: chair,
-    }
-  ];
-
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [wishlistedProducts, setWishlistedProducts] = useState({});
   const productsContainerRef = useRef(null);
-  const [favorites, setFavorites] = useState({});
 
-  const toggleFavorite = (productId) => {
-    setFavorites(prev => ({
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/flash-sales/featured');
+        // Get random 4-5 products
+        const shuffled = response.data.sort(() => 0.5 - Math.random());
+        const selectedProducts = shuffled.slice(0, Math.floor(Math.random() * 2) + 4);
+        setProducts(selectedProducts);
+
+        // Load wishlist from localStorage
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        const wishlistMap = {};
+        wishlist.forEach(p => wishlistMap[p._id] = true);
+        setWishlistedProducts(wishlistMap);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const toggleWishlist = (productId) => {
+    const product = products.find(p => p._id === productId);
+    const existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+    const isAlreadyWishlisted = existingWishlist.some(p => p._id === productId);
+
+    let updatedWishlist;
+    if (isAlreadyWishlisted) {
+      updatedWishlist = existingWishlist.filter(p => p._id !== productId);
+    } else {
+      updatedWishlist = [...existingWishlist, product];
+    }
+
+    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+
+    setWishlistedProducts((prev) => ({
       ...prev,
-      [productId]: !prev[productId]
+      [productId]: !prev[productId],
     }));
   };
 
@@ -110,6 +73,9 @@ const FlashSales = () => {
       });
     }
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="flash-sales-container">
@@ -157,50 +123,63 @@ const FlashSales = () => {
           <IoIosArrowBack />
         </div>
         <div className="products-container" ref={productsContainerRef}>
-          {products.map((product) => (
-            <div key={product.id} className="product-card">
-              <div className="product-image-container">
-                <img src={product.image} alt={product.name} className="product-image" />
-                <button className="add-to-cart">Add To Cart</button>
-                <div className="product-badges">
-                  <span className="discount-badge">{product.discount}</span>
-                  <div className="icon-group">
-                    <button className="icon-button">
-                      <FaEye className="view-icon" />
-                    </button>
-                    <button 
-                      className="icon-button wishlist-button"
-                      onClick={() => toggleFavorite(product.id)}
-                    >
-                      {favorites[product.id] ? (
-                        <FaHeart className="wishlist-icon filled" />
-                      ) : (
-                        <FaRegHeart className="wishlist-icon" />
-                      )}
-                    </button>
+          {products.map((product) => {
+            const isWishlisted = wishlistedProducts[product._id] || false;
+            
+            return (
+              <div key={product._id} className="product-card">
+                <div className="product-image-container">
+                  <img 
+                    src={`http://localhost:5000${product.images[0]}`} 
+                    alt={product.name} 
+                    className="product-image" 
+                    onError={(e) => {
+                      e.target.onerror = null; 
+                      e.target.src = "https://via.placeholder.com/300x400?text=No+Image";
+                    }}
+                  />
+                  <button className="add-to-cart">Add To Cart</button>
+                  <div className="product-badges">
+                    <span className="discount-badge">{product.Discount}</span>
+                    <div className="icon-group">
+                      <button className="icon-button">
+                        <FaEye className="view-icon" />
+                      </button>
+                      <button 
+                        className="icon-button wishlist-button"
+                        onClick={() => toggleWishlist(product._id)}
+                        title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+                      >
+                        {isWishlisted ? (
+                          <FaHeart className="wishlist-icon filled" />
+                        ) : (
+                          <FaRegHeart className="wishlist-icon" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="product-details">
+                  <h3 className="product-name">{product.name}</h3>
+                  <div className="price-container">
+                    <span className="current-price">Rs. {product.DiscountedPrice}</span>
+                    <span className="old-price">Rs. {product.Actualprice}</span>
+                  </div>
+                  <div className="rating-container">
+                    <div className="stars">
+                      {[...Array(5)].map((_, i) => (
+                        <FaStar 
+                          key={i} 
+                          className={i < Math.floor(product.ratings) ? "star-filled" : "star-empty"} 
+                        />
+                      ))}
+                    </div>
+                    <span className="rating-count">({product.ratings})</span>
                   </div>
                 </div>
               </div>
-              <div className="product-details">
-                <h3 className="product-name">{product.name}</h3>
-                <div className="price-container">
-                  <span className="current-price">{product.price}</span>
-                  <span className="old-price">{product.oldPrice}</span>
-                </div>
-                <div className="rating-container">
-                  <div className="stars">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar 
-                        key={i} 
-                        className={i < 4 ? "star-filled" : "star-empty"} 
-                      />
-                    ))}
-                  </div>
-                  <span className="rating-count">({product.rating})</span>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <div className="slider-arrow right-arrow" onClick={scrollRight}>
           <IoIosArrowForward />
