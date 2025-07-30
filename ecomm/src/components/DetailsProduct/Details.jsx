@@ -1,14 +1,18 @@
-import React from 'react';
+// src/components/DetailsProduct/details.jsx
+import React, { useState } from 'react';
 import '../../assets/css/DetailsProduct.css';
+import { useCart } from '../../context/CartContext';
 
 const Details = ({ product }) => {
+  const { addToCart } = useCart();
+  const [quantity, setQuantity] = useState(1);
+
   if (!product) return null;
 
   const thumbnails = product.images?.slice(1) || [];
 
   return (
     <div className="product-container">
-      {/* Left: Images */}
       <div className="product-images">
         <div className="thumbnail-list">
           {thumbnails.map((img, idx) => (
@@ -32,7 +36,6 @@ const Details = ({ product }) => {
         </div>
       </div>
 
-      {/* Right: Details */}
       <div className="product-details">
         <h2 className="product-title">{product.name}</h2>
         <div className="product-rating">
@@ -47,26 +50,19 @@ const Details = ({ product }) => {
 
         <p className="description">{product.description}</p>
 
-        <div className="colors">
-          <span>Colours:</span>
-          <div className="color-options">
-            <span className="color red" />
-            <span className="color gray" />
-          </div>
-        </div>
-
-        <div className="sizes">
-          <span>Size:</span>
-          <div className="size-options">
-            {['XS', 'S', 'M', 'L', 'XL'].map((size, i) => (
-              <button key={i} className={`size-btn ${size === 'M' ? 'selected' : ''}`}>{size}</button>
-            ))}
-          </div>
-        </div>
-
         <div className="quantity-row">
-          <input type="number" defaultValue={1} min={1} />
-          <button className="buy-btn">Buy Now</button>
+          <input
+            type="number"
+            min={1}
+            value={quantity}
+            onChange={(e) => setQuantity(parseInt(e.target.value))}
+          />
+          <button
+            className="buy-btn"
+            onClick={() => addToCart(product, quantity)}
+          >
+            Add to Cart
+          </button>
           <button className="wishlist-btn">♡</button>
         </div>
 
