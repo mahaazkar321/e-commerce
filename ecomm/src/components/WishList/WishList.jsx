@@ -1,6 +1,7 @@
 
 import "../../assets/css/WishList.css";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { FaRegHeart, FaHeart, FaStar, FaEye, FaTrash } from "react-icons/fa";
 import gamepad from "../../assets/img/gamepad.png";
 import keyboard from "../../assets/img/keyboard.png";
@@ -29,10 +30,20 @@ const Wishlist = () => {
     localStorage.setItem('wishlist', JSON.stringify(updated));
     setProducts(updated);
 =======
+=======
+import { FaTrash, FaStar } from "react-icons/fa";
+import React from "react";
+import { useWishlist } from "../../context/WishlistProvider";
+
+const Wishlist = () => {
+>>>>>>> Stashed changes
   const { wishlistItems, removeWishlistItem } = useWishlist();
 
   const getDisplayPrice = (product) => {
     return product.DiscountedPrice ?? product.price ?? product.Actualprice ?? 0;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   };
 
@@ -41,6 +52,7 @@ const Wishlist = () => {
       <div className="best-selling-header">
         <div className="title-container">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
           <p className="flash-title">WishList({products.length})</p>
         </div>
         <div className="view-all-container">
@@ -48,10 +60,14 @@ const Wishlist = () => {
 =======
           <p className="flash-title">Wishlist ({wishlistItems.length})</p>
 >>>>>>> Stashed changes
+=======
+          <p className="flash-title">Wishlist ({wishlistItems.length})</p>
+>>>>>>> Stashed changes
         </div>
       </div>
 
       <div className="products-container">
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         {products.map((product) => (
           <div key={product._id} className="product-card">
@@ -83,6 +99,8 @@ const Wishlist = () => {
           </div>
         ))}
 =======
+=======
+>>>>>>> Stashed changes
         {wishlistItems.length === 0 ? (
           <div className="empty-wishlist">
             <p>Your wishlist is empty</p>

@@ -11,12 +11,18 @@ import { WishlistProvider } from './context/WishlistProvider';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <App />
 =======
+=======
+>>>>>>> Stashed changes
     <WishlistProvider>
       <CartProvider>
     <App />
     </CartProvider></WishlistProvider>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   </StrictMode>
 )

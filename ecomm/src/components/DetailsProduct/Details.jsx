@@ -1,9 +1,12 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import React from 'react';
 import '../../assets/css/DetailsProduct.css';
 
 const Details = ({ product }) => {
 =======
+=======
+>>>>>>> Stashed changes
 import React, { useState } from 'react';
 import '../../assets/css/DetailsProduct.css';
 import { useCart } from '../../context/CartContext';
@@ -32,7 +35,11 @@ const Details = ({ product }) => {
   return (
     <div className="product-container">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       {/* Left: Images */}
+=======
+      {/* ---------- Images Section ---------- */}
+>>>>>>> Stashed changes
 =======
       {/* ---------- Images Section ---------- */}
 >>>>>>> Stashed changes
@@ -68,7 +75,11 @@ const Details = ({ product }) => {
       </div>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       {/* Right: Details */}
+=======
+      {/* ---------- Details Section ---------- */}
+>>>>>>> Stashed changes
 =======
       {/* ---------- Details Section ---------- */}
 >>>>>>> Stashed changes
@@ -87,6 +98,7 @@ const Details = ({ product }) => {
 
         <p className="description">{product.description}</p>
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
         <div className="colors">
           <span>Colours:</span>
@@ -110,6 +122,8 @@ const Details = ({ product }) => {
           <button className="buy-btn">Buy Now</button>
           <button className="wishlist-btn">♡</button>
 =======
+=======
+>>>>>>> Stashed changes
         {/* ---------- Quantity and Actions ---------- */}
         <div className="quantity-row">
           <input
@@ -129,6 +143,22 @@ const Details = ({ product }) => {
             disabled={product.stock === 0}
           >
             {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
+<<<<<<< Updated upstream
+          </button>
+
+          {/* Wishlist Toggle Button */}
+          <button
+            className={`wishlist-btn ${isInWishlist ? 'active' : ''}`}
+            onClick={() =>
+              toggleWishlistItem({ ...product, category: normalizedCategory })
+            }
+            title={isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
+            aria-label="Toggle wishlist"
+          >
+            {isInWishlist ? <FaHeart color="red" /> : <FaRegHeart color="gray" />}
+          </button>
+>>>>>>> Stashed changes
+=======
           </button>
 
           {/* Wishlist Toggle Button */}
