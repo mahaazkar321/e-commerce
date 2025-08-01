@@ -2,13 +2,16 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../assets/css/Navbar.css';
 import { FaSearch, FaRegHeart, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
+import { useCart } from "../context/CartContext";
+import { useWishlist } from '../context/WishlistProvider';
 
 const Navbar = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+const { clearCart } = useCart();
+const { clearWishlist } = useWishlist(); 
     // Check if user is logged in (on mount or when localStorage changes)
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -18,12 +21,12 @@ const Navbar = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        setIsLoggedIn(false);
-        navigate('/log-in');
-    };
+const handleLogout = () => {
+  localStorage.removeItem('token');
+  clearCart();       // clears local cart
+  clearWishlist();   // clears local wishlist
+  navigate('/log-in');
+};
 
     const isHome = location.pathname === '/';
     const isAbout = location.pathname === '/about';

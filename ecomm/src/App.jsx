@@ -1,6 +1,3 @@
-
-
-// App.jsx
 import {
   Route,
   createBrowserRouter,
@@ -20,29 +17,34 @@ import ProductDetails from './pages/ProductDetails';
 import ProdCat from './pages/ProdCat';
 import BestSellingProd from './components/Home/BestSellingProd';
 import ErrorPage from './pages/ErrorPage';
+import { Toaster } from 'react-hot-toast';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<MainLayout />} errorElement={<ErrorPage />}>
       <Route index element={<HomePage />} />
-      <Route path='contact' element={<Contact />} />
-      <Route path='about' element={<About />} />
-      <Route path='sign-up' element={<SignUp />} />
-      <Route path='log-in' element={<LogIn />} />
-      <Route path='wish-list' element={<WishList />} />
-      <Route path='cart' element={<Cart />} />
-      <Route path='check-out' element={<CheckOut />} />
-      <Route path='product-details' element={<ProductDetails />} />
+      <Route path="contact" element={<Contact />} />
+      <Route path="about" element={<About />} />
+      <Route path="sign-up" element={<SignUp />} />
+      <Route path="log-in" element={<LogIn />} />
+      <Route path="wish-list" element={<WishList />} />
+      <Route path="cart" element={<Cart />} />
+      <Route path="check-out" element={<CheckOut />} />
+      <Route path="product-details" element={<ProductDetails />} />
       <Route path="/category/:categoryName" element={<ProdCat />} />
-<Route path="/products/:categoryName/:productId" element={<ProductDetails />} />
-  <Route path="/products/:categoryName" element={<BestSellingProd />} />  {/* ✅ ADD THIS */}
-
+      <Route path="/products/:categoryName/:productId" element={<ProductDetails />} />
+      <Route path="/products/:categoryName" element={<BestSellingProd />} />
     </Route>
   )
 );
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <Toaster position="bottom-center" toastOptions={{ duration: 2000 }} />
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;

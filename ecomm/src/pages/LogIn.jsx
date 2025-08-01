@@ -1,33 +1,62 @@
-import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import '../assets/css/Navbar.css';
+import { FaSearch, FaRegHeart, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { useCart } from "../context/CartContext";
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
+import { useWishlist } from "../context/WishlistProvider"; // ✅ ADD THIS LINE
 const LogIn = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+  const { setToken } = useCart();
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
-    try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
-      alert(res.data.message);
-      localStorage.setItem('token', res.data.token);
-      navigate('/');
-    } catch (err) {
-      alert(err.response?.data?.message || 'Login failed');
-    }
-  };
+const { fetchWishlistFromServer } = useWishlist(); // ✅ Add this
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+    const authToken = res.data.token;
+
+    alert(res.data.message);
+    localStorage.setItem('token', authToken);
+    setToken(authToken); // triggers cart fetch
+    await fetchWishlistFromServer(authToken); // ✅ fetch saved wishlist
+    navigate('/');
+  } catch (err) {
+    alert(err.response?.data?.message || 'Login failed');
+  }
+};
+
 
   return (
-    <div style={styles.container}>
+    <form onSubmit={handleSubmit} style={styles.container}>
       <h2>Log In</h2>
-      <input name="email" placeholder="Email" style={styles.input} onChange={handleChange} />
-      <input type="password" name="password" placeholder="Password" style={styles.input} onChange={handleChange} />
-      <button onClick={handleSubmit} style={styles.loginBtn}>Log In</button>
-    </div>
+      <input
+        name="email"
+        value={formData.email}
+        placeholder="Email"
+        style={styles.input}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        value={formData.password}
+        placeholder="Password"
+        style={styles.input}
+        onChange={handleChange}
+        required
+      />
+      <button type="submit" style={styles.loginBtn}>Log In</button>
+    </form>
   );
 };
 
@@ -63,3 +92,6 @@ const styles = {
 };
 
 export default LogIn;
+
+
+
