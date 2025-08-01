@@ -1,12 +1,3 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import React from 'react';
-import '../../assets/css/DetailsProduct.css';
-
-const Details = ({ product }) => {
-=======
-=======
->>>>>>> Stashed changes
 import React, { useState } from 'react';
 import '../../assets/css/DetailsProduct.css';
 import { useCart } from '../../context/CartContext';
@@ -20,7 +11,6 @@ const Details = ({ product }) => {
   const { toggleWishlistItem, wishlistItems } = useWishlist();
   const [quantity, setQuantity] = useState(1);
 
->>>>>>> Stashed changes
   if (!product) return null;
 
   const thumbnails = product.images?.slice(1) || [];
@@ -29,20 +19,12 @@ const Details = ({ product }) => {
     categoryName || (product.category?.toLowerCase().replace(/\s+/g, '-') || '');
 
   const isInWishlist = wishlistItems.some(
-    (item) => item._id === product._id && item.category === normalizedCategory
+    (item) => (item._id || item.id) === product._id && item.category === normalizedCategory
   );
 
   return (
     <div className="product-container">
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      {/* Left: Images */}
-=======
       {/* ---------- Images Section ---------- */}
->>>>>>> Stashed changes
-=======
-      {/* ---------- Images Section ---------- */}
->>>>>>> Stashed changes
       <div className="product-images">
         <div className="thumbnail-list">
           {thumbnails.map((img, idx) => (
@@ -74,15 +56,7 @@ const Details = ({ product }) => {
         </div>
       </div>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-      {/* Right: Details */}
-=======
       {/* ---------- Details Section ---------- */}
->>>>>>> Stashed changes
-=======
-      {/* ---------- Details Section ---------- */}
->>>>>>> Stashed changes
       <div className="product-details">
         <h2 className="product-title">{product.name}</h2>
 
@@ -98,39 +72,12 @@ const Details = ({ product }) => {
 
         <p className="description">{product.description}</p>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        <div className="colors">
-          <span>Colours:</span>
-          <div className="color-options">
-            <span className="color red" />
-            <span className="color gray" />
-          </div>
-        </div>
-
-        <div className="sizes">
-          <span>Size:</span>
-          <div className="size-options">
-            {['XS', 'S', 'M', 'L', 'XL'].map((size, i) => (
-              <button key={i} className={`size-btn ${size === 'M' ? 'selected' : ''}`}>{size}</button>
-            ))}
-          </div>
-        </div>
-
-        <div className="quantity-row">
-          <input type="number" defaultValue={1} min={1} />
-          <button className="buy-btn">Buy Now</button>
-          <button className="wishlist-btn">♡</button>
-=======
-=======
->>>>>>> Stashed changes
         {/* ---------- Quantity and Actions ---------- */}
         <div className="quantity-row">
           <input
             type="number"
             min={1}
             value={quantity}
-            aria-label="Product quantity"
             onChange={(e) => {
               const val = Math.max(1, parseInt(e.target.value) || 1);
               setQuantity(val);
@@ -143,36 +90,17 @@ const Details = ({ product }) => {
             disabled={product.stock === 0}
           >
             {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
-<<<<<<< Updated upstream
           </button>
 
-          {/* Wishlist Toggle Button */}
           <button
             className={`wishlist-btn ${isInWishlist ? 'active' : ''}`}
             onClick={() =>
               toggleWishlistItem({ ...product, category: normalizedCategory })
             }
             title={isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
-            aria-label="Toggle wishlist"
           >
             {isInWishlist ? <FaHeart color="red" /> : <FaRegHeart color="gray" />}
           </button>
->>>>>>> Stashed changes
-=======
-          </button>
-
-          {/* Wishlist Toggle Button */}
-          <button
-            className={`wishlist-btn ${isInWishlist ? 'active' : ''}`}
-            onClick={() =>
-              toggleWishlistItem({ ...product, category: normalizedCategory })
-            }
-            title={isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
-            aria-label="Toggle wishlist"
-          >
-            {isInWishlist ? <FaHeart color="red" /> : <FaRegHeart color="gray" />}
-          </button>
->>>>>>> Stashed changes
         </div>
 
         {/* ---------- Delivery Info ---------- */}
