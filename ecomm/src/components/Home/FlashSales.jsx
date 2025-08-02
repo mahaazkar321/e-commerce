@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import "../../assets/css/FlashSales.css";
 import { FaRegHeart, FaHeart, FaStar, FaEye } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { Link} from 'react-router-dom';
 import axios from "axios";
 
 const FlashSales = () => {
@@ -187,7 +188,10 @@ const FlashSales = () => {
       </div>
 
       <div className="views-all">
-        <button className="views-all-btn">View All Products</button>
+        <Link to="/flash-sales-all">
+                      <button className="views-all-btn">View All Products</button>
+                    </Link>
+        
       </div>
     </div>
   );
