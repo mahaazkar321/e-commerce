@@ -82,15 +82,15 @@ export const CartProvider = ({ children }) => {
 
       // ✅ Manual sync immediately after update
       const storedToken = localStorage.getItem('token');
-      if (storedToken && hasFetchedCart) {
-        axios
-          .post(
-            'http://localhost:5000/api/cart',
-            { cartItems: updated },
-            { headers: { Authorization: `Bearer ${storedToken}` } }
-          )
-          .catch((err) => console.error("Failed to sync cart:", err));
-      }
+      // if (storedToken && hasFetchedCart) {
+      //   axios
+      //     .post(
+      //       'http://localhost:5000/api/cart',
+      //       { cartItems: updated },
+      //       { headers: { Authorization: `Bearer ${storedToken}` } }
+      //     )
+      //     .catch((err) => console.error("Failed to sync cart:", err));
+      // }
 
       return updated;
     });
