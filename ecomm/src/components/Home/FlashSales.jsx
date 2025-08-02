@@ -2,156 +2,113 @@ import React, { useRef, useState, useEffect } from "react";
 import "../../assets/css/FlashSales.css";
 import { FaRegHeart, FaHeart, FaStar, FaEye } from "react-icons/fa";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import axios from "axios";
+import { useCart } from "../../context/CartContext";
+import { useWishlist } from "../../context/WishlistProvider";
 
 const FlashSales = () => {
   const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [wishlistedProducts, setWishlistedProducts] = useState({});
-  const productsContainerRef = useRef(null);
+  const [loading,  setLoading]  = useState(true);
+  const [error,    setError]    = useState(null);
+  const sliderRef                 = useRef(null);
+
+  const { addToCart }                   = useCart();
+  const { wishlistItems, toggleWishlistItem } = useWishlist();
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    (async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/flash-sales/featured');
-        // Get random 4-5 products
-        const shuffled = response.data.sort(() => 0.5 - Math.random());
-        const selectedProducts = shuffled.slice(0, Math.floor(Math.random() * 2) + 4);
-        setProducts(selectedProducts);
-
-        // Load wishlist from localStorage
-        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        const wishlistMap = {};
-        wishlist.forEach(p => wishlistMap[p._id] = true);
-        setWishlistedProducts(wishlistMap);
-      } catch (err) {
-        setError(err.message);
+        const { data } = await axios.get(
+          "http://localhost:5000/api/flash-sales/featured"
+        );
+        const shuffled = data.sort(() => 0.5 - Math.random());
+        setProducts(shuffled.slice(0, Math.floor(Math.random() * 2) + 4));
+      } catch (e) {
+        setError(e.message);
       } finally {
         setLoading(false);
       }
-    };
-
-    fetchProducts();
+    })();
   }, []);
 
-  const toggleWishlist = (productId) => {
-    const product = products.find(p => p._id === productId);
-    const existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+  const isWishlisted = (id) =>
+    wishlistItems.some((i) => i._id === id || i.id === id);
 
-    const isAlreadyWishlisted = existingWishlist.some(p => p._id === productId);
-
-    let updatedWishlist;
-    if (isAlreadyWishlisted) {
-      updatedWishlist = existingWishlist.filter(p => p._id !== productId);
-    } else {
-      updatedWishlist = [...existingWishlist, product];
-    }
-
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
-
-    setWishlistedProducts((prev) => ({
-      ...prev,
-      [productId]: !prev[productId],
-    }));
-  };
-
-  const scrollLeft = () => {
-    if (productsContainerRef.current) {
-      productsContainerRef.current.scrollBy({
-        left: -250,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (productsContainerRef.current) {
-      productsContainerRef.current.scrollBy({
-        left: 250,
-        behavior: 'smooth'
-      });
-    }
+  const slideBy = (offset) => {
+    sliderRef.current?.scrollBy({ left: offset, behavior: "smooth" });
   };
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (error)   return <div>Error: {error}</div>;
 
   return (
     <div className="flash-sales-container">
+      {/* Header */}
       <div className="flash-sales-header">
         <div className="title-container">
-          <span style={{
-            backgroundColor: '#DB4444', 
-            width: '15px', 
-            height: '30px', 
-            borderRadius: '5px'
-          }}>
-            <p className="today-text" style={{
-              marginLeft: '30px', 
-              marginTop: '8px'
-            }}>Today's</p>
+          <span style={{ backgroundColor: "#DB4444", width: 15, height: 30, borderRadius: 5 }}>
+            <p className="today-text" style={{ marginLeft: 30, marginTop: 8 }}>
+              Today's
+            </p>
           </span>
-          <br/>
+          <br />
           <h2 className="flash-title">Flash Sales</h2>
-        </div>
-        <div className="countdown">
-          <div className="countdown-item">
-            <span>Days</span>
-            <strong>03</strong>
-          </div>
-          <div className="countdown-separator">:</div>
-          <div className="countdown-item">
-            <span>Hours</span>
-            <strong>23</strong>
-          </div>
-          <div className="countdown-separator">:</div>
-          <div className="countdown-item">
-            <span>Minutes</span>
-            <strong>19</strong>
-          </div>
-          <div className="countdown-separator">:</div>
-          <div className="countdown-item">
-            <span>Seconds</span>
-            <strong>56</strong>
-          </div>
         </div>
       </div>
 
+      {/* Slider */}
       <div className="product-slider">
-        <div className="slider-arrow left-arrow" onClick={scrollLeft}>
+        <div className="slider-arrow left-arrow" onClick={() => slideBy(-250)}>
           <IoIosArrowBack />
         </div>
-        <div className="products-container" ref={productsContainerRef}>
-          {products.map((product) => {
-            const isWishlisted = wishlistedProducts[product._id] || false;
-            
+
+        <div className="products-container" ref={sliderRef}>
+          {products.map((p) => {
+            const displayPrice = p.DiscountedPrice ?? p.price ?? p.Actualprice ?? 0;
+            const inWishlist    = isWishlisted(p._id);
+
             return (
-              <div key={product._id} className="product-card">
+              <div key={p._id} className="product-card">
                 <div className="product-image-container">
-                  <img 
-                    src={`http://localhost:5000${product.images[0]}`} 
-                    alt={product.name} 
-                    className="product-image" 
+                  <img
+                    src={`http://localhost:5000${p.images[0]}`}
+                    alt={p.name}
+                    className="product-image"
                     onError={(e) => {
-                      e.target.onerror = null; 
+                      e.target.onerror = null;
                       e.target.src = "https://via.placeholder.com/300x400?text=No+Image";
                     }}
                   />
-                  <button className="add-to-cart">Add To Cart</button>
+
+                  {/* Add to Cart */}
+                  <button
+                    className="add-to-cart"
+                    onClick={() =>
+                      addToCart(
+                        { id: p._id, name: p.name, price: displayPrice, images: p.images },
+                        1
+                      )
+                    }
+                  >
+                    Add To Cart
+                  </button>
+
+                  {/* Badges */}
                   <div className="product-badges">
-                    <span className="discount-badge">{product.Discount}</span>
+                    <span className="discount-badge">{p.Discount}</span>
+
                     <div className="icon-group">
                       <button className="icon-button">
                         <FaEye className="view-icon" />
                       </button>
-                      <button 
+                      {/* Wishlist */}
+                      <button
                         className="icon-button wishlist-button"
-                        onClick={() => toggleWishlist(product._id)}
-                        title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+                        onClick={() => toggleWishlistItem({ ...p, category: "flash-sales" })}
+                        title={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
                       >
-                        {isWishlisted ? (
+                        {inWishlist ? (
                           <FaHeart className="wishlist-icon filled" />
                         ) : (
                           <FaRegHeart className="wishlist-icon" />
@@ -160,38 +117,41 @@ const FlashSales = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Details */}
                 <div className="product-details">
-                  <h3 className="product-name">{product.name}</h3>
+                  <h3 className="product-name">{p.name}</h3>
                   <div className="price-container">
-                    <span className="current-price">Rs. {product.DiscountedPrice}</span>
-                    <span className="old-price">Rs. {product.Actualprice}</span>
+                    <span className="current-price">Rs. {displayPrice}</span>
+                    <span className="old-price">Rs. {p.Actualprice}</span>
                   </div>
                   <div className="rating-container">
                     <div className="stars">
                       {[...Array(5)].map((_, i) => (
-                        <FaStar 
-                          key={i} 
-                          className={i < Math.floor(product.ratings) ? "star-filled" : "star-empty"} 
+                        <FaStar
+                          key={i}
+                          className={i < Math.floor(p.ratings) ? "star-filled" : "star-empty"}
                         />
                       ))}
                     </div>
-                    <span className="rating-count">({product.ratings})</span>
+                    <span className="rating-count">({p.ratings})</span>
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
-        <div className="slider-arrow right-arrow" onClick={scrollRight}>
+
+        <div className="slider-arrow right-arrow" onClick={() => slideBy(250)}>
           <IoIosArrowForward />
         </div>
       </div>
 
+      {/* View All */}
       <div className="views-all">
         <Link to="/flash-sales-all">
-                      <button className="views-all-btn">View All Products</button>
-                    </Link>
-        
+          <button className="views-all-btn">View All Products</button>
+        </Link>
       </div>
     </div>
   );
