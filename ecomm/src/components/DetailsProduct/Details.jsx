@@ -9,6 +9,7 @@ const Details = ({ product }) => {
   const { categoryName } = useParams();
   const { addToCart } = useCart();
   const { toggleWishlistItem, wishlistItems } = useWishlist();
+
   const [quantity, setQuantity] = useState(1);
 
   if (!product) return null;
@@ -28,11 +29,14 @@ const Details = ({ product }) => {
     addToCart(
       {
         ...product,
-        id: productId, // normalize id
+        id: productId,
       },
       quantity
     );
   };
+
+  const getDisplayPrice = () =>
+    product.DiscountedPrice ?? product.price ?? product.Actualprice;
 
   return (
     <div className="product-container">
@@ -80,7 +84,15 @@ const Details = ({ product }) => {
           </span>
         </div>
 
-        <div className="price">Rs. {product.price}</div>
+        {/* Price block with discount logic */}
+        <div className="price">
+          Rs. {getDisplayPrice()}
+          {product.DiscountedPrice && (
+            <span className="old-price" style={{ marginLeft: '10px', textDecoration: 'line-through', color: '#888' }}>
+              Rs. {product.price}
+            </span>
+          )}
+        </div>
 
         <p className="description">{product.description}</p>
 

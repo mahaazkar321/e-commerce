@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ExploreOurProd = () => {
-  // Using more reliable fashion image sources
-  const products = [
-    { id: 1, name: 'Classic White Shirt', price: '$39.99', imageUrl: 'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=300&h=400&fit=crop' },
-    { id: 2, name: 'Slim Fit Jeans', price: '$59.99', imageUrl: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=300&h=400&fit=crop' },
-    { id: 3, name: 'Leather Jacket', price: '$129.99', imageUrl: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=300&h=400&fit=crop' },
-    { id: 4, name: 'Summer Dress', price: '$49.99', imageUrl: 'https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=300&h=400&fit=crop' },
-    { id: 5, name: 'Running Shoes', price: '$79.99', imageUrl: 'https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=300&h=400&fit=crop' },
-    { id: 6, name: 'Wool Sweater', price: '$69.99', imageUrl: 'https://images.unsplash.com/photo-1527719327859-c6ce80353573?w=300&h=400&fit=crop' },
-    { id: 7, name: 'Formal Suit', price: '$199.99', imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=400&fit=crop'},
-    { id: 8, name: 'Casual T-shirt', price: '$24.99', imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=400&fit=crop' }
-  ];
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/all-products');
+        setProducts(response.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) return <div style={{ textAlign: 'center', padding: '2rem' }}>Loading products...</div>;
+  if (error) return <div style={{ color: 'red', textAlign: 'center', padding: '2rem' }}>Error: {error}</div>;
 
   return (
     <div style={{
@@ -33,7 +46,7 @@ const ExploreOurProd = () => {
         gap: '1.5rem'
       }}>
         {products.map((product) => (
-          <div key={product.id} style={{
+          <div key={product._id} style={{
             border: '1px solid #e1e1e1',
             borderRadius: '8px',
             overflow: 'hidden',
@@ -47,20 +60,22 @@ const ExploreOurProd = () => {
               position: 'relative',
               height: '250px',
               overflow: 'hidden',
-              backgroundColor: '#f5f5f5' // Fallback background
+              backgroundColor: '#f5f5f5'
             }}>
               <img 
-                src={product.imageUrl} 
+                src={product.images && product.images[0] ? 
+                  `http://localhost:5000${product.images[0]}` : 
+                  'https://via.placeholder.com/300x400?text=Product+Image'} 
                 alt={product.name}
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  display: 'block' // Ensures no extra space below image
+                  display: 'block'
                 }}
                 onError={(e) => {
                   e.target.src = 'https://via.placeholder.com/300x400?text=Product+Image';
-                  e.target.style.objectFit = 'contain'; // Better for placeholder
+                  e.target.style.objectFit = 'contain';
                 }}
               />
               <div style={{
@@ -73,7 +88,7 @@ const ExploreOurProd = () => {
                 borderRadius: '4px',
                 fontSize: '0.9rem'
               }}>
-                {product.id}
+                {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
               </div>
             </div>
             <div style={{ padding: '1rem' }}>
@@ -88,20 +103,23 @@ const ExploreOurProd = () => {
                 color: '#e63946',
                 marginBottom: '1rem'
               }}>
-                {product.price}
+                Rs. {product.price}
               </p>
-              <button style={{
-                width: '100%',
-                padding: '0.5rem',
-                backgroundColor: '#333',
-                color: 'white',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                ':hover': {
-                  backgroundColor: '#555'
-                }
-              }}>
+              <button 
+                onClick={() => navigate(`/products/all-products/${product._id}`)}
+                style={{
+                  width: '100%',
+                  padding: '0.5rem',
+                  backgroundColor: '#333',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  ':hover': {
+                    backgroundColor: '#555'
+                  }
+                }}
+              >
                 View Details
               </button>
             </div>

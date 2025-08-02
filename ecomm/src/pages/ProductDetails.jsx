@@ -15,12 +15,7 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-
-        let url = `http://localhost:5000/api/${categoryName}/${productId}`;
-        if (categoryName === 'best-selling') {
-          url = `http://localhost:5000/api/best-selling/${productId}`;
-        }
-
+        const url = `http://localhost:5000/api/${categoryName}/${productId}`;
         const res = await axios.get(url);
         setProduct(res.data);
       } catch (err) {

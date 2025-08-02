@@ -16,6 +16,7 @@ const Cart = () => {
   const total = cartItems.reduce((sum, item) => sum + getSubtotal(item), 0);
 
   return (
+    <>
     <div className="cart-container">
       <div className="cart-header">
         <h1>Exclusive</h1>
@@ -110,6 +111,7 @@ const Cart = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 
