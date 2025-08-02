@@ -16,6 +16,7 @@ import CheckOut from './pages/CheckOut';
 import ProductDetails from './pages/ProductDetails';
 import ProdCat from './pages/ProdCat';
 import BestSellingProd from './components/Home/BestSellingProd';
+import FlashSales from './components/Home/FlashSales';
 import FlashSalesAll from './pages/FlashSalesAll';
 import ErrorPage from './pages/ErrorPage';
 import { Toaster } from 'react-hot-toast';
@@ -36,6 +37,8 @@ const router = createBrowserRouter(
       <Route path="/category/:categoryName" element={<ProdCat />} />
       <Route path="/products/:categoryName/:productId" element={<ProductDetails />} />
       <Route path="/products/:categoryName" element={<BestSellingProd />} />
+   <Route path="/products/flash-sales" element={<FlashSales />} />
+
     </Route>
   )
 );
