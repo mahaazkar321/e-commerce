@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import '../../assets/css/DetailsProduct.css';
 import { useCart } from '../../context/CartContext';
@@ -10,7 +9,6 @@ const Details = ({ product }) => {
   const { categoryName } = useParams();
   const { addToCart } = useCart();
   const { toggleWishlistItem, wishlistItems } = useWishlist();
-
   const [quantity, setQuantity] = useState(1);
 
   if (!product) return null;
@@ -70,7 +68,6 @@ const Details = ({ product }) => {
         </div>
       </div>
 
-
       {/* ---------- Details Section ---------- */}
       <div className="product-details">
         <h2 className="product-title">{product.name}</h2>
@@ -87,9 +84,7 @@ const Details = ({ product }) => {
 
         <p className="description">{product.description}</p>
 
-
         {/* ---------- Quantity and Actions ---------- */}
-
         <div className="quantity-row">
           <input
             type="number"
@@ -118,16 +113,6 @@ const Details = ({ product }) => {
           >
             {isInWishlist ? <FaHeart color="red" /> : <FaRegHeart color="gray" />}
           </button>
-            onChange={(e) => setQuantity(parseInt(e.target.value))}
-          />
-          <button
-            className="buy-btn"
-            onClick={() => addToCart(product, quantity)}
-          >
-            Add to Cart
-          </button>
-          <button className="wishlist-btn">♡</button>
-
         </div>
 
         {/* ---------- Delivery Info ---------- */}
