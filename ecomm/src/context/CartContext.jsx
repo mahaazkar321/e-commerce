@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-
+import toast from 'react-hot-toast';
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
@@ -74,8 +74,10 @@ export const CartProvider = ({ children }) => {
             ? { ...item, quantity: item.quantity + qty }
             : item
         );
+          toast.success('updated to Cart');
       } else {
         updated = [...prev, { ...product, quantity: qty }];
+          toast.success('Added to Cart');
       }
 
       // ✅ Manual sync immediately after update
