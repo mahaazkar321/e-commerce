@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -83,15 +82,15 @@ export const CartProvider = ({ children }) => {
 
       // ✅ Manual sync immediately after update
       const storedToken = localStorage.getItem('token');
-      // if (storedToken && hasFetchedCart) {
-      //   axios
-      //     .post(
-      //       'http://localhost:5000/api/cart',
-      //       { cartItems: updated },
-      //       { headers: { Authorization: `Bearer ${storedToken}` } }
-      //     )
-      //     .catch((err) => console.error("Failed to sync cart:", err));
-      // }
+      if (storedToken && hasFetchedCart) {
+        axios
+          .post(
+            'http://localhost:5000/api/cart',
+            { cartItems: updated },
+            { headers: { Authorization: `Bearer ${storedToken}` } }
+          )
+          .catch((err) => console.error("Failed to sync cart:", err));
+      }
 
       return updated;
     });
@@ -126,58 +125,3 @@ export const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
-
-// src/context/CartContext.jsx
-import React, { createContext, useState, useContext } from 'react';
-
-const CartContext = createContext();
-
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-
-  const addToCart = (product, quantity = 1) => {
-    const existingItem = cartItems.find(item => item.id === product._id);
-
-    if (existingItem) {
-      setCartItems(prev =>
-        prev.map(item =>
-          item.id === product._id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item
-        )
-      );
-    } else {
-      setCartItems(prev => [
-        ...prev,
-        {
-          id: product._id,
-          name: product.name,
-          price: product.price,
-          quantity,
-          image: product.images?.[0]
-            ? `http://localhost:5000${product.images[0]}`
-            : 'https://via.placeholder.com/300x400?text=No+Image'
-        }
-      ]);
-    }
-  };
-
-  const updateQuantity = (id, newQty) => {
-    setCartItems(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, quantity: parseInt(newQty) } : item
-      )
-    );
-  };
-
-  const value = {
-    cartItems,
-    addToCart,
-    updateQuantity
-  };
-
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-};
-
-export const useCart = () => useContext(CartContext);
-
