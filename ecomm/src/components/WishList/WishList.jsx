@@ -2,9 +2,10 @@ import "../../assets/css/WishList.css";
 import { FaTrash, FaStar } from "react-icons/fa";
 import React from "react";
 import { useWishlist } from "../../context/WishlistProvider";
-
+import { useCart } from "../../context/CartContext"; // ✅ Import Cart Context
 const Wishlist = () => {
   const { wishlistItems, removeWishlistItem } = useWishlist();
+  const { addToCart } = useCart(); // ✅ Get addToCart function
 
   const getDisplayPrice = (product) =>
     product.DiscountedPrice ?? product.price ?? product.Actualprice ?? 0;
@@ -36,7 +37,12 @@ const Wishlist = () => {
                     alt={product.name}
                     className="product-image"
                   />
-                  <button className="add-to-cart">Add To Cart</button>
+                  <button
+                    className="add-to-cart"
+                    onClick={() => addToCart({ ...product, id: product.id || product._id }, 1)}
+                  >
+                    Add To Cart
+                  </button>
                   <div className="product-badges">
                     {product.Discount && (
                       <span className="discount-badge">{product.Discount}</span>
