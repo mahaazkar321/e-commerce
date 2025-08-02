@@ -1,33 +1,73 @@
-import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import '../assets/css/Navbar.css';
+import { useState, useEffect } from 'react';
+import { useWishlist } from "../context/WishlistProvider"; // ✅
+import axios from 'axios';
+import { useCart } from '../context/CartContext';
 const LogIn = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
+
+  const { setToken, fetchCart } = useCart();              // ✅ Add fetchCart
+  const { fetchWishlistFromServer } = useWishlist();
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
       const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const authToken = res.data.token;
+
       alert(res.data.message);
-      localStorage.setItem('token', res.data.token);
+
+      // ✅ Save token in localStorage & state
+      localStorage.setItem('token', authToken);
+      setToken(authToken);
+
+      // ✅ Fetch both cart and wishlist
+      await fetchCart();                 
+      await fetchWishlistFromServer(authToken); 
+
       navigate('/');
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed');
     }
   };
 
+  // ✅ If already logged in, redirect
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/');
+    }
+  }, [navigate]);
+
   return (
-    <div style={styles.container}>
+    <form onSubmit={handleSubmit} style={styles.container}>
       <h2>Log In</h2>
-      <input name="email" placeholder="Email" style={styles.input} onChange={handleChange} />
-      <input type="password" name="password" placeholder="Password" style={styles.input} onChange={handleChange} />
-      <button onClick={handleSubmit} style={styles.loginBtn}>Log In</button>
-    </div>
+      <input
+        name="email"
+        value={formData.email}
+        placeholder="Email"
+        style={styles.input}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        value={formData.password}
+        placeholder="Password"
+        style={styles.input}
+        onChange={handleChange}
+        required
+      />
+      <button type="submit" style={styles.loginBtn}>Log In</button>
+    </form>
   );
 };
 

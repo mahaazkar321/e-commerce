@@ -24,6 +24,12 @@ const sportsRoute = require('./routes/sportsRoute')
 const BestSelling = require('./routes/BestSellingRoute');
 const FlashSales = require('./routes/FlashSalesRoute');
 // ✅ API Endpoints
+const cartRoutes = require('./routes/cart');
+const wishlistRoutes = require('./routes/wishlist');
+
+app.use('/api/cart', cartRoutes);
+app.use('/api/wishlist', wishlistRoutes);
+
 app.use('/api/woman-fashion', womenFashionRoutes);
 app.use('/api/appliance-electronics', ElectronicsRoute);
 app.use('/api/men-fashion', MenFashionRoute);
