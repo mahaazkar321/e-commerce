@@ -136,7 +136,9 @@ const FlashSalesAll = () => {
                   Rs. {getDisplayPrice(product)}
                 </p>
                 <button
-                  onClick={() => navigate(`/products/${categoryName}/${product._id}`)}
+                  onClick={() =>
+                  navigate(`/products/flash-sales/${product._id}`)
+                }
                   style={{
                     width: '100%',
                     padding: '0.5rem',
