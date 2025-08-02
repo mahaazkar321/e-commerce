@@ -1,0 +1,92 @@
+[
+    {
+        "id": "1",
+        "name": "Herbal Face Wash",
+        "description": "Gentle and natural face wash enriched with neem and aloe vera to cleanse and refresh your skin.",
+        "Actualprice": 5000,
+        "DiscountedPrice":4500,
+        "Discount":"10%",
+        "category": "Health and Beauty",
+        "images": [
+            "/uploads/healthbeauty/facewash.webp"
+        ],
+        "stock": 50,
+        "ratings": 4.5,
+        "isFeatured": true
+    },
+    {
+        "id": "2",
+        "name": "Curtains",
+        "description": "Elegant and premium-quality curtains that add style and privacy to your living space.",
+        "Actualprice": 15000,
+        "DiscountedPrice":12000,
+        "Discount":"20%",
+        "category": "Home and Lifestyle",
+        "images": [
+            "/uploads/homeandlife/curtains.webp"
+        ],
+        "stock": 30,
+        "ratings": 4.3,
+        "isFeatured": true
+    },
+    {
+        "id": "3",
+        "name": "Rings",
+        "description": "Stylish Rings for woman",
+        "Actualprice": 1000,
+        "DiscountedPrice":500,
+        "Discount":"50%",
+        "category": "Woman's Fashion",
+        "images": [
+            "/uploads/women/rings.jpeg"
+        ],
+        "stock": 30,
+        "ratings": 4.3,
+        "isFeatured": true
+    },
+    {
+        "id": "4",
+        "name": "hockey",
+        "description": "hockey",
+        "Actualprice": 5000,
+        "DiscountedPrice":3600,
+        "Discount":"28%",
+        "category": "Sports and Outdoor",
+        "images": [
+            "/uploads/sports/hockey.jpeg"
+        ],
+        "stock": 30,
+        "ratings": 4.3,
+        "isFeatured": true
+    },
+    {
+        "id": "5",
+        "name": "Brufen",
+        "description": "Brufen is a pain reliever and anti-inflammatory medicine commonly used for headaches, muscle pain, and arthritis.",
+        "Actualprice": 5000,
+        "DiscountedPrice":2500,
+        "Discount":"50%",
+        "category": "Syrup and Medicine",
+        "images": [
+            "/uploads/medicine/brufen.webp"
+        ],
+        "stock": 30,
+        "ratings": 4.3,
+        "isFeatured": true
+    },
+    {
+        "id": "6",
+        "name": "SmartWatch",
+        "description": "Fitness tracker and smartwatch combo",
+        "Actualprice": 7000,
+        "DiscountedPrice":4900,
+        "Discount":"30%",
+        "category": "Appliance Electronics",
+        "images": [
+            "/uploads/electronics/smartwatch.jpeg"
+        ],
+        "stock": 25,
+        "ratings": 4.4,
+        "isFeatured": false
+    }
+]

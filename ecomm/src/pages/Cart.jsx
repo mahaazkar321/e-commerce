@@ -1,18 +1,21 @@
+
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext"; // ✅ import CartContext
+
 import "../assets/css/cart.css";
 
 const Cart = () => {
   const navigate = useNavigate();
+
   const { cartItems, updateQuantity } = useCart(); // ✅ use global cart
 
   const handleQuantityChange = (id, newQty) => {
     updateQuantity(id, newQty);
   };
 
-  const getSubtotal = (item) => item.price * item.quantity;
 
+  const getSubtotal = (item) => item.price * item.quantity;
   const total = cartItems.reduce((sum, item) => sum + getSubtotal(item), 0);
 
   return (
@@ -26,6 +29,7 @@ const Cart = () => {
       </div>
 
       <div className="cart-table">
+
   <div className="cart-table-scroll">
     <table>
       <thead>
@@ -72,17 +76,59 @@ const Cart = () => {
   </div>
 </div>
 
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cartItems.length > 0 ? (
+              cartItems.map((item) => (
+                <tr key={item.id}>
+                  <td>
+                    <div className="product-info">
+                      <img src={item.image} alt={item.name} className="products-image" />
+                      <span>{item.name}</span>
+                    </div>
+                  </td>
+                  <td>${item.price}</td>
+                  <td>
+                    <select
+                      value={item.quantity}
+                      onChange={(e) => updateQuantity(item.id, e.target.value)}
+                    >
+                      {[...Array(10)].map((_, i) => (
+                        <option key={i + 1} value={i + 1}>
+                          {i + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td>${getSubtotal(item)}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" style={{ textAlign: "center" }}>
+                  Your cart is empty.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
       <div className="cart-actions">
         <Link to="/">
           <button className="return-btn mt-3">Return To Shop</button>
         </Link>
 
         <div className="coupon-section">
-          <input
-            type="text"
-            placeholder="Coupon Code"
-            className="coupon-input"
-          />
+          <input type="text" placeholder="Coupon Code" className="coupon-input" />
           <button className="apply-btn">Apply Coupon</button>
         </div>
 
