@@ -9,72 +9,101 @@ export const CartProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [hasFetchedCart, setHasFetchedCart] = useState(false);
 
-  // Fetch cart from server when token changes
+  // 🔁 Fetch cart from backend
+  const fetchCart = async () => {
+    const storedToken = localStorage.getItem('token');
+    if (!storedToken) return;
+
+    try {
+      const res = await axios.get('http://localhost:5000/api/cart', {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      });
+      setCartItems(res.data || []);
+      setHasFetchedCart(true);
+    } catch (err) {
+      console.error("Fetch cart failed:", err.message);
+      setCartItems([]);
+      setHasFetchedCart(true);
+    }
+  };
+
+  // 🔁 Fetch cart when component mounts or token changes
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     setToken(storedToken);
 
     if (storedToken) {
-      axios
-        .get('http://localhost:5000/api/cart', {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        })
-        .then((res) => {
-          setCartItems(res.data);
-          setHasFetchedCart(true); // Only sync after fetching from server
-        })
-        .catch(() => {
-          setCartItems([]);
-          setHasFetchedCart(true); // Still allow syncs if fetch failed
-        });
+      fetchCart();
     } else {
       setCartItems([]);
       setHasFetchedCart(false);
     }
   }, [token]);
 
-  // Sync cart to backend after initial fetch
+  // 🔁 Sync cart to backend when cartItems changes
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     if (storedToken && hasFetchedCart) {
-      axios.post(
-        'http://localhost:5000/api/cart',
-        { cartItems },
-        { headers: { Authorization: `Bearer ${storedToken}` } }
-      ).catch((err) => console.error("Failed to sync cart:", err));
+      axios
+        .post(
+          'http://localhost:5000/api/cart',
+          { cartItems },
+          { headers: { Authorization: `Bearer ${storedToken}` } }
+        )
+        .catch((err) => console.error("Failed to sync cart:", err));
     }
   }, [cartItems, hasFetchedCart]);
 
+  // ✅ Update quantity of specific item
   const updateQuantity = (id, quantity) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, quantity: parseInt(quantity) } : item
-      )
+    const updated = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity: parseInt(quantity) } : item
     );
+    setCartItems(updated);
   };
 
-  const addToCart = (product) => {
+  // ✅ Add item to cart
+  const addToCart = (product, qty = 1) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
+      let updated;
+
       if (existing) {
-        return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+        updated = prev.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + qty }
+            : item
         );
       } else {
-        return [...prev, { ...product, quantity: 1 }];
+        updated = [...prev, { ...product, quantity: qty }];
       }
+
+      // ✅ Manual sync immediately after update
+      const storedToken = localStorage.getItem('token');
+      if (storedToken && hasFetchedCart) {
+        axios
+          .post(
+            'http://localhost:5000/api/cart',
+            { cartItems: updated },
+            { headers: { Authorization: `Bearer ${storedToken}` } }
+          )
+          .catch((err) => console.error("Failed to sync cart:", err));
+      }
+
+      return updated;
     });
   };
 
+  // ✅ Clear entire cart
   const clearCart = () => {
     setCartItems([]);
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
-      axios.post(
-        'http://localhost:5000/api/cart/clear',
-        {},
-        { headers: { Authorization: `Bearer ${storedToken}` } }
-      ).catch((err) => console.error("Failed to clear server cart:", err));
+      axios
+        .delete('http://localhost:5000/api/cart', {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
+        .catch((err) => console.error("Failed to clear server cart:", err));
     }
   };
 
@@ -86,7 +115,8 @@ export const CartProvider = ({ children }) => {
         addToCart,
         updateQuantity,
         clearCart,
-        setToken, // Use in login/logout
+        setToken,
+        fetchCart, // 🆕 You can call this after login
       }}
     >
       {children}

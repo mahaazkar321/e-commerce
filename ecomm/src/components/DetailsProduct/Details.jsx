@@ -13,14 +13,26 @@ const Details = ({ product }) => {
 
   if (!product) return null;
 
+  const productId = product._id || product.id;
   const thumbnails = product.images?.slice(1) || [];
+  const isInStock = product?.stock > 0;
 
-  const normalizedCategory =
-    categoryName || (product.category?.toLowerCase().replace(/\s+/g, '-') || '');
+  const slugify = (str) => str?.toLowerCase().replace(/\s+/g, '-') || '';
+  const normalizedCategory = categoryName || slugify(product.category);
 
   const isInWishlist = wishlistItems.some(
-    (item) => (item._id || item.id) === product._id && item.category === normalizedCategory
+    (item) => (item._id || item.id) === productId && item.category === normalizedCategory
   );
+
+  const handleAddToCart = () => {
+    addToCart(
+      {
+        ...product,
+        id: productId, // normalize id
+      },
+      quantity
+    );
+  };
 
   return (
     <div className="product-container">
@@ -64,7 +76,7 @@ const Details = ({ product }) => {
           <span className="stars">★★★★☆</span>
           <span className="reviews">(150 Reviews)</span>
           <span className="in-stock">
-            {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+            {isInStock ? 'In Stock' : 'Out of Stock'}
           </span>
         </div>
 
@@ -86,10 +98,10 @@ const Details = ({ product }) => {
 
           <button
             className="buy-btn"
-            onClick={() => addToCart(product, quantity)}
-            disabled={product.stock === 0}
+            onClick={handleAddToCart}
+            disabled={!isInStock}
           >
-            {product.stock > 0 ? 'Add to Cart' : 'Out of Stock'}
+            {isInStock ? 'Add to Cart' : 'Out of Stock'}
           </button>
 
           <button

@@ -1,35 +1,14 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
-
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext"; // ✅ import CartContext
 import "../assets/css/cart.css";
-import monitor from '../assets/img/monitor.png'
-import gamepad from '../assets/img/gamepad.png'
+
 const Cart = () => {
   const navigate = useNavigate();
-
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "LCD Monitor",
-      price: 650,
-      quantity: 1,
-      image: monitor
-    },
-    {
-      id: 2,
-      name: "H1 Gamepad",
-      price: 550,
-      quantity: 2,
-      image:gamepad
-    }
-  ]);
+  const { cartItems, updateQuantity } = useCart(); // ✅ use global cart
 
   const handleQuantityChange = (id, newQty) => {
-    const updatedItems = cartItems.map((item) =>
-      item.id === id ? { ...item, quantity: parseInt(newQty) } : item
-    );
-    setCartItems(updatedItems);
+    updateQuantity(id, newQty);
   };
 
   const getSubtotal = (item) => item.price * item.quantity;
@@ -47,48 +26,56 @@ const Cart = () => {
       </div>
 
       <div className="cart-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cartItems.map((item) => (
-              <tr key={item.id}>
-                <td>
-                  <div className="product-info">
-                    <img src={item.image} alt={item.name} className="products-image" />
-                    <span>{item.name}</span>
-                  </div>
-                </td>
-                <td>${item.price}</td>
-                <td>
-                  <select
-                    value={item.quantity}
-                    onChange={(e) => handleQuantityChange(item.id, e.target.value)}
-                  >
-                    {[...Array(10)].map((_, i) => (
-                      <option key={i + 1} value={i + 1}>
-                        {i + 1}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-                <td>${getSubtotal(item)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+  <div className="cart-table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {cartItems.map((item) => (
+          <tr key={item.id}>
+            <td>
+              <div className="product-info">
+              <img className="products-image"
+                src={
+                  item.images?.[0]
+                    ? `http://localhost:5000${item.images[0]}`
+                    : 'https://via.placeholder.com/60x60?text=No+Image'
+                } 
+                alt={item.name}
+              />
+              </div>
+            </td>
+            <td>${item.price}</td>
+            <td>
+              <select
+                value={item.quantity}
+                onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+              >
+                {[...Array(10)].map((_, i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1}
+                  </option>
+                ))}
+              </select>
+            </td>
+            <td>${getSubtotal(item)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
 
       <div className="cart-actions">
-<Link to="/">
-  <button className="return-btn mt-3">Return To Shop</button>
-</Link>
+        <Link to="/">
+          <button className="return-btn mt-3">Return To Shop</button>
+        </Link>
 
         <div className="coupon-section">
           <input
@@ -98,9 +85,9 @@ const Cart = () => {
           />
           <button className="apply-btn">Apply Coupon</button>
         </div>
-<Link to="">
-       <button className="update-btn">Update Cart</button>
-     </Link>  </div>
+
+        <button className="update-btn">Update Cart</button>
+      </div>
 
       <div className="cart-total">
         <h2>Cart Total</h2>

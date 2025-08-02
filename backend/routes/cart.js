@@ -34,10 +34,11 @@ router.post('/', auth, async (req, res) => {
   res.json(user.cart);
 });
 
-// 🧹 Clear cart
+// 🧹 Clear cart (fix the route: should be DELETE '/')
 router.delete('/', auth, async (req, res) => {
   const user = await User.findByIdAndUpdate(req.userId, { cart: [] }, { new: true });
   res.json(user.cart);
 });
+
 
 module.exports = router;

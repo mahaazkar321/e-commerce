@@ -1,39 +1,50 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../assets/css/Navbar.css';
-import { FaSearch, FaRegHeart, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
-import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistProvider"; // ✅
 import axios from 'axios';
-
-import { useWishlist } from "../context/WishlistProvider"; // ✅ ADD THIS LINE
+import { useCart } from '../context/CartContext';
 const LogIn = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
-  const { setToken } = useCart();
+
+  const { setToken, fetchCart } = useCart();              // ✅ Add fetchCart
+  const { fetchWishlistFromServer } = useWishlist();
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-const { fetchWishlistFromServer } = useWishlist(); // ✅ Add this
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const authToken = res.data.token;
 
-  try {
-    const res = await axios.post('http://localhost:5000/api/auth/login', formData);
-    const authToken = res.data.token;
+      alert(res.data.message);
 
-    alert(res.data.message);
-    localStorage.setItem('token', authToken);
-    setToken(authToken); // triggers cart fetch
-    await fetchWishlistFromServer(authToken); // ✅ fetch saved wishlist
-    navigate('/');
-  } catch (err) {
-    alert(err.response?.data?.message || 'Login failed');
-  }
-};
+      // ✅ Save token in localStorage & state
+      localStorage.setItem('token', authToken);
+      setToken(authToken);
 
+      // ✅ Fetch both cart and wishlist
+      await fetchCart();                 
+      await fetchWishlistFromServer(authToken); 
+
+      navigate('/');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Login failed');
+    }
+  };
+
+  // ✅ If already logged in, redirect
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   return (
     <form onSubmit={handleSubmit} style={styles.container}>
@@ -92,6 +103,3 @@ const styles = {
 };
 
 export default LogIn;
-
-
-

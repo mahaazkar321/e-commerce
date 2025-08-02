@@ -1,14 +1,20 @@
-import React from 'react';
-import '../assets/css/CheckOut.css'; // Import the CSS file
-import monitor from "../assets/img/monitor.png";
-import gamepad from "../assets/img/gamepad.png";
+import React, { useMemo } from 'react';
+import '../assets/css/CheckOut.css';
 import visa from '../assets/img/visa.png';
-import masterCard from '../assets/img/masterCard.png'
+import masterCard from '../assets/img/masterCard.png';
+import { useCart } from '../context/CartContext';
 
 const CheckOut = () => {
+  const { cartItems } = useCart();
+
+  // Calculate subtotal
+  const subtotal = useMemo(() => {
+    return cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  }, [cartItems]);
+
   return (
     <div className="checkout-container">
-      {/* Left Side - Billing Form */}
+      {/* ---------- Billing Form ---------- */}
       <div className="billing-form">
         <h2>Billing Details</h2>
         <form>
@@ -33,28 +39,38 @@ const CheckOut = () => {
         </form>
       </div>
 
-      {/* Right Side - Order Summary */}
+      {/* ---------- Order Summary ---------- */}
       <div className="order-summary">
-        <div className="product-item">
-          <img src={monitor} alt="LCD Monitor" />
-          <span>LCD Monitor</span>
-          <span className="price">$650</span>
-        </div>
-        <div className="product-item">
-          <img src={gamepad} alt="Gamepad" />
-          <span>H1 Gamepad</span>
-          <span className="price">$1100</span>
-        </div>
+        {cartItems.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          cartItems.map((item, idx) => (
+            <div key={idx} className="product-item">
+              <img
+                src={
+                  item.images?.[0]
+                    ? `http://localhost:5000${item.images[0]}`
+                    : 'https://via.placeholder.com/60x60?text=No+Image'
+                }
+                alt={item.name}
+              />
+              <span>{item.name} x {item.quantity}</span>
+              <span className="price">${item.price * item.quantity}</span>
+            </div>
+          ))
+        )}
+
         <div className="summary-totals">
-          <div><span>Subtotal:</span><span>$1750</span></div>
+          <div><span>Subtotal:</span><span>${subtotal}</span></div>
         </div>
         <div className="summary-totals">
           <div><span>Shipping:</span><span>Free</span></div>
         </div>
         <div className="summary-totals">
-          <div className="total"><span>Total:</span><span>$1750</span></div>
+          <div className="total"><span>Total:</span><span>${subtotal}</span></div>
         </div>
 
+        {/* ---------- Payment Options ---------- */}
         <div className="payment-options">
           <label className="payment-bank">
             <input type="radio" name="payment" />
@@ -71,7 +87,7 @@ const CheckOut = () => {
           </label>
         </div>
 
-
+        {/* ---------- Coupon + Place Order ---------- */}
         <div className="coupon-section">
           <input type="text" placeholder="Coupon Code" />
           <button className="apply-btn">Apply Coupon</button>
