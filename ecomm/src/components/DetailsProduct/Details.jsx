@@ -25,15 +25,17 @@ const Details = ({ product }) => {
     (item) => (item._id || item.id) === productId && item.category === normalizedCategory
   );
 
-  const handleAddToCart = () => {
-    addToCart(
-      {
-        ...product,
-        id: productId,
-      },
-      quantity
-    );
-  };
+ const handleAddToCart = () => {
+  addToCart(
+    {
+      ...product,
+      id: productId,
+      price: getDisplayPrice(), // explicitly set the discounted price
+    },
+    quantity
+  );
+};
+
 
   const getDisplayPrice = () =>
     product.DiscountedPrice ?? product.price ?? product.Actualprice;
@@ -87,11 +89,12 @@ const Details = ({ product }) => {
         {/* Price block with discount logic */}
         <div className="price">
           Rs. {getDisplayPrice()}
-          {product.DiscountedPrice && (
-            <span className="old-price" style={{ marginLeft: '10px', textDecoration: 'line-through', color: '#888' }}>
-              Rs. {product.price}
-            </span>
-          )}
+         {product.DiscountedPrice && product.Actualprice && (
+  <span className="old-price" style={{ marginLeft: '10px', textDecoration: 'line-through', color: '#888' }}>
+    Rs. {product.Actualprice}
+  </span>
+)}
+
         </div>
 
         <p className="description">{product.description}</p>
