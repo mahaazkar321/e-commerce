@@ -54,7 +54,7 @@ const { cartItems, updateQuantity, removeFromCart } = useCart(); // ✅ include 
           />
         </div>
       </td>
-      <td>${item.price}</td>
+      <td>Rs. {item.price}</td>
       <td>
         <select
           value={item.quantity}
@@ -67,7 +67,7 @@ const { cartItems, updateQuantity, removeFromCart } = useCart(); // ✅ include 
           ))}
         </select>
       </td>
-      <td>${getSubtotal(item)}</td>
+      <td>Rs. {getSubtotal(item)}</td>
 <td>
   <button
     className="delete-btn"
