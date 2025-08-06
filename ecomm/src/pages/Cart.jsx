@@ -35,6 +35,7 @@ const { cartItems, updateQuantity, removeFromCart } = useCart(); // ✅ include 
           <th>Price</th>
           <th>Quantity</th>
           <th>Subtotal</th>
+          <th></th>
         </tr>
       </thead>
     <tbody>
@@ -67,15 +68,17 @@ const { cartItems, updateQuantity, removeFromCart } = useCart(); // ✅ include 
         </select>
       </td>
       <td>${getSubtotal(item)}</td>
-      <td>
-        <button
-          className="delete-btn"
-          onClick={() => removeFromCart(item.id)}
-          title="Remove item"
-        >
-          <FaTrash />
-        </button>
-      </td>
+<td>
+  <button
+    className="delete-btn"
+    onClick={() => removeFromCart(item.id)}
+    title="Remove item"
+  >
+    <FaTrash />
+  </button>
+</td>
+
+     
     </tr>
   ))}
 </tbody>
@@ -98,7 +101,7 @@ const { cartItems, updateQuantity, removeFromCart } = useCart(); // ✅ include 
           <button className="apply-btn">Apply Coupon</button>
         </div>
 
-        <button className="update-btn">Update Cart</button>
+     
       </div>
 
       <div className="cart-total">
