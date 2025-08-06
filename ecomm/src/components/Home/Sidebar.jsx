@@ -45,7 +45,7 @@ const Sidebar = () => {
                     <div className="text-left" style={{ maxWidth: "500px" }}>
                       <h2 className="text-white font-weight-bold mb-3" style={{ fontSize: "2rem" }}>New Collection</h2>
                       <h3 className="text-white font-weight-bold mb-4" style={{ fontSize: "1.5rem" }}>Up to 10% off Voucher</h3>
-                      <a href="" className="btn btn-light py-2 px-4 d-inline-flex align-items-center" style={{ fontWeight: "600" }}>
+                      <a href="#explore" className="btn btn-light py-2 px-4 d-inline-flex align-items-center" style={{ fontWeight: "600" }}>
                         Shop Now <i className="fa fa-arrow-right ml-2"></i>
                       </a>
                     </div>
@@ -57,7 +57,7 @@ const Sidebar = () => {
                     <div className="text-left" style={{ maxWidth: "500px" }}>
                       <h2 className="text-white font-weight-bold mb-3" style={{ fontSize: "2rem" }}>New Collection</h2>
                       <h3 className="text-white font-weight-bold mb-4" style={{ fontSize: "1.5rem" }}>Up to 10% off Voucher</h3>
-                      <a href="" className="btn btn-light py-2 px-4 d-inline-flex align-items-center" style={{ fontWeight: "600" }}>
+                      <a href="#explore" className="btn btn-light py-2 px-4 d-inline-flex align-items-center" style={{ fontWeight: "600" }}>
                         Shop Now <i className="fa fa-arrow-right ml-2"></i>
                       </a>
                     </div>
@@ -69,7 +69,7 @@ const Sidebar = () => {
                     <div className="text-left" style={{ maxWidth: "500px" }}>
                       <h2 className="text-white font-weight-bold mb-3" style={{ fontSize: "2rem" }}>New Collection</h2>
                       <h3 className="text-white font-weight-bold mb-4" style={{ fontSize: "1.5rem" }}>Up to 10% off Voucher</h3>
-                      <a href="" className="btn btn-light py-2 px-4 d-inline-flex align-items-center" style={{ fontWeight: "600" }}>
+                      <a href="#explore" className="btn btn-light py-2 px-4 d-inline-flex align-items-center" style={{ fontWeight: "600" }}>
                         Shop Now <i className="fa fa-arrow-right ml-2"></i>
                       </a>
                     </div>

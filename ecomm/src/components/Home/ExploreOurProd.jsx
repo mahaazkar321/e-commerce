@@ -27,7 +27,7 @@ const ExploreOurProd = () => {
   if (error) return <div style={{ color: 'red', textAlign: 'center', padding: '2rem' }}>Error: {error}</div>;
 
   return (
-    <div style={{
+    <div id='explore' style={{
       padding: '2rem',
       maxWidth: '1200px',
       margin: '0 auto',
