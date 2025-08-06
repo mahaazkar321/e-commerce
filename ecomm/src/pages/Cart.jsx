@@ -1,11 +1,11 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext"; // ✅ import CartContext
 import "../assets/css/cart.css";
-
+import { FaTrash } from "react-icons/fa";
+import { useCart } from "../context/CartContext"; // ✅ import useCart
 const Cart = () => {
   const navigate = useNavigate();
-  const { cartItems, updateQuantity } = useCart(); // ✅ use global cart
+const { cartItems, updateQuantity, removeFromCart } = useCart(); // ✅ include removeFromCart
 
   const handleQuantityChange = (id, newQty) => {
     updateQuantity(id, newQty);
@@ -37,38 +37,49 @@ const Cart = () => {
           <th>Subtotal</th>
         </tr>
       </thead>
-      <tbody>
-        {cartItems.map((item) => (
-          <tr key={item.id}>
-            <td>
-              <div className="product-info">
-              <img className="products-image"
-                src={
-                  item.images?.[0]
-                    ? `http://localhost:5000${item.images[0]}`
-                    : 'https://via.placeholder.com/60x60?text=No+Image'
-                } 
-                alt={item.name}
-              />
-              </div>
-            </td>
-            <td>Rs. {item.price}</td>
-            <td>
-              <select
-                value={item.quantity}
-                onChange={(e) => handleQuantityChange(item.id, e.target.value)}
-              >
-                {[...Array(10)].map((_, i) => (
-                  <option key={i + 1} value={i + 1}>
-                    {i + 1}
-                  </option>
-                ))}
-              </select>
-            </td>
-            <td>Rs. {getSubtotal(item)}</td>
-          </tr>
-        ))}
-      </tbody>
+    <tbody>
+  {cartItems.map((item) => (
+    <tr key={item.id}>
+      <td>
+        <div className="product-info">
+          <img
+            className="products-image"
+            src={
+              item.images?.[0]
+                ? `http://localhost:5000${item.images[0]}`
+                : "https://via.placeholder.com/60x60?text=No+Image"
+            }
+            alt={item.name}
+          />
+        </div>
+      </td>
+      <td>${item.price}</td>
+      <td>
+        <select
+          value={item.quantity}
+          onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+        >
+          {[...Array(10)].map((_, i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
+        </select>
+      </td>
+      <td>${getSubtotal(item)}</td>
+      <td>
+        <button
+          className="delete-btn"
+          onClick={() => removeFromCart(item.id)}
+          title="Remove item"
+        >
+          <FaTrash />
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
     </table>
   </div>
 </div>

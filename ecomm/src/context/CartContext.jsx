@@ -96,6 +96,21 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+    // ✅ Remove a single item from cart
+  const removeFromCart = (productId) => {
+    const updated = cartItems.filter((item) => item.id !== productId);
+    setCartItems(updated);
+
+    const storedToken = localStorage.getItem('token');
+    if (storedToken && hasFetchedCart) {
+      axios
+        .delete(`http://localhost:5000/api/cart/${productId}`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
+        .catch((err) => console.error("Failed to delete item:", err));
+    }
+  };
+
   // ✅ Clear entire cart
   const clearCart = () => {
     setCartItems([]);
@@ -118,6 +133,7 @@ export const CartProvider = ({ children }) => {
         updateQuantity,
         clearCart,
         setToken,
+        removeFromCart,
         fetchCart, // 🆕 You can call this after login
       }}
     >
