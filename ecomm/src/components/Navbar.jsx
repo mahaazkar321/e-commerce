@@ -10,8 +10,10 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-const { clearCart } = useCart();
-const { clearWishlist } = useWishlist(); 
+    const [searchTerm, setSearchTerm] = useState('');
+    const { clearCart } = useCart();
+    const { clearWishlist } = useWishlist(); 
+
     // Check if user is logged in (on mount or when localStorage changes)
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -21,12 +23,22 @@ const { clearWishlist } = useWishlist();
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-const handleLogout = () => {
-  localStorage.removeItem('token');
-  clearCart();       // clears local cart
-  clearWishlist();   // clears local wishlist
-  navigate('/log-in');
-};
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        clearCart();       // clears local cart
+        clearWishlist();   // clears local wishlist
+        navigate('/log-in');
+    };
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchTerm.trim()) {
+            navigate(`/search-results?query=${encodeURIComponent(searchTerm)}`);
+            setSearchTerm(''); // Optional: Clear search term after submission
+            setIsMobileMenuOpen(false); // Close mobile menu after search
+        }
+    };
 
     const isHome = location.pathname === '/';
     const isAbout = location.pathname === '/about';
@@ -72,13 +84,23 @@ const handleLogout = () => {
                 </ul>
 
                 <div className="search-container">
-                    <form>
+                    <form onSubmit={handleSearch}>
                         <div className="input-group">
-                            <input type="text" className="form-control" placeholder="Search for products" />
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                placeholder="Search for products" 
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
                             <div className="input-group-append">
-                                <span className="input-group-text bg-transparent text-primary">
+                                <button 
+                                    type="submit" 
+                                    className="input-group-text bg-transparent text-primary"
+                                    style={{ border: 'none', cursor: 'pointer' }}
+                                >
                                     <FaSearch />
-                                </span>
+                                </button>
                             </div>
                         </div>
                     </form>

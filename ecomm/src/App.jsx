@@ -19,6 +19,7 @@ import BestSellingProd from './components/Home/BestSellingProd';
 import FlashSales from './components/Home/FlashSales';
 import ErrorPage from './pages/ErrorPage';
 import { Toaster } from 'react-hot-toast';
+import SearchResult from './components/SearchResult';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -36,6 +37,9 @@ const router = createBrowserRouter(
       <Route path="/products/:categoryName/:productId" element={<ProductDetails />} />
       <Route path="/products/:categoryName" element={<BestSellingProd />} />
    <Route path="/products/flash-sales" element={<FlashSales />} />
+   
+<Route path="/search-results" element={<SearchResult />} />
+
 
     </Route>
   )

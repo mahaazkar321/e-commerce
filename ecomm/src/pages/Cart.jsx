@@ -52,7 +52,7 @@ const Cart = () => {
               />
               </div>
             </td>
-            <td>${item.price}</td>
+            <td>Rs. {item.price}</td>
             <td>
               <select
                 value={item.quantity}
@@ -65,7 +65,7 @@ const Cart = () => {
                 ))}
               </select>
             </td>
-            <td>${getSubtotal(item)}</td>
+            <td>Rs. {getSubtotal(item)}</td>
           </tr>
         ))}
       </tbody>
@@ -95,7 +95,7 @@ const Cart = () => {
         <div className="total-details">
           <div className="subtotal">
             <span>Subtotal:</span>
-            <span>${total}</span>
+            <span>Rs. {total}</span>
           </div>
           <div className="shipping">
             <span>Shipping:</span>
@@ -103,7 +103,7 @@ const Cart = () => {
           </div>
           <div className="total">
             <span>Total:</span>
-            <span>${total}</span>
+            <span>Rs. {total}</span>
           </div>
         </div>
         <button className="checkout-btn" onClick={() => navigate("/check-out")}>
