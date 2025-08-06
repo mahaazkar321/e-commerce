@@ -31,4 +31,5 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ error: 'Server error while fetching product' });
   }
 });
+
 module.exports = router;
