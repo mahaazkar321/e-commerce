@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { getCategoryEndpoint } from '../../../../backend/utils/categoryMapper';
-import '../../assets/css/AddProd.css'
-
+import '../../assets/css/AddProd.css';
 const AddProduct = () => {
   const [product, setProduct] = useState({
     name: '',
     description: '',
     price: '',
-    category: 'MenFashion',
+    category: 'Men Fashion',
     stock: '',
     ratings: '',
     isFeatured: false
@@ -16,6 +15,7 @@ const AddProduct = () => {
   const [images, setImages] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
   const [message, setMessage] = useState('');
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const categories = [
@@ -27,6 +27,7 @@ const AddProduct = () => {
     'Home and Lifestyle',
     'Health and Beauty',
   ];
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -44,7 +45,21 @@ const AddProduct = () => {
     const previews = files.map(file => URL.createObjectURL(file));
     setPreviewImages(previews);
   };
-
+  const resetForm = () => {
+    setProduct({
+      name: '',
+      description: '',
+      price: '',
+      category: 'Men Fashion',
+      stock: '',
+      ratings: '',
+      isFeatured: false
+    });
+    setImages([]);
+    setPreviewImages([]);
+    setMessage('');
+    setShowSuccessPopup(false);
+  };
   // Update your handleSubmit function
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +68,6 @@ const AddProduct = () => {
 
     try {
       const formData = new FormData();
-
       // Append product data
       formData.append('name', product.name);
       formData.append('description', product.description);
@@ -69,14 +83,12 @@ const AddProduct = () => {
       // Get the correct endpoint based on category
       const endpoint = getCategoryEndpoint(product.category);
 
-      const response = await axios.post(`http://localhost:5000${endpoint}`, formData, {
+      await axios.post(`http://localhost:5000${endpoint}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-
-      setMessage('Product added successfully!');
-      
+      setShowSuccessPopup(true);
     } catch (error) {
       setMessage(error.response?.data?.message || error.message || 'Failed to add product');
     } finally {
@@ -86,14 +98,37 @@ const AddProduct = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 Add">
-      <h1 className="text-2xl font-bold mb-6 head1">Add New Product</h1>
+      {/* Overlay that appears when popup is shown */}
+      {showSuccessPopup && (
+        <div className="success-popup">
+          <div className="success-popup-content">
+            <div className="success-popup-header">
+              <h3 className="success-popup-title">Success!</h3>
+              <button
+                onClick={resetForm}
+                className="success-popup-close"
+                aria-label="Close"
+              >
+                &times;
+              </button>
+            </div>
+            <p className="success-popup-message">Product has been added successfully!</p>
+            <button
+              onClick={resetForm}
+              className="success-popup-button"
+            >
+              Add Another Product
+            </button>
+          </div>
+        </div>
+      )}
 
+      <h1 className="text-2xl font-bold mb-6 head1">Add New Product</h1>
       {message && (
         <div className={`mb-4 p-3 rounded ${message.includes('successfully') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
           {message}
         </div>
       )}
-
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 formProd">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2 formlabel" htmlFor="name">
