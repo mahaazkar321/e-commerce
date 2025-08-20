@@ -6,6 +6,9 @@ const NewArrival = () => {
   const handleShopNow = (categoryName) => {
     navigate(`/category/${categoryName}`);
   };
+  const handleShopnow = (categoryName) => {
+    navigate(`/products/${categoryName}`);
+  };
 
   return (
     <div style={{
@@ -246,7 +249,7 @@ const NewArrival = () => {
             fontWeight: 'bold'
           }}>Saeed Ghani</p>
           <button 
-            onClick={() => handleShopNow('woman-fashion/68a2e52f89fe424363a1cff3')}
+            onClick={() => handleShopnow('woman-fashion/68a2e52f89fe424363a1cff3')}
             style={{
               backgroundColor: '#000',
               color: '#fff',
