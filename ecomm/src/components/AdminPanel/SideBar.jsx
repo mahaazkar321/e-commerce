@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AddProduct from "./AddProd";
-
+import AdminOrders from "./AdminOrders";
 
 const SideBar = () => {
   const [activeComponent, setActiveComponent] = useState("addProduct");
@@ -10,7 +10,7 @@ const SideBar = () => {
       case "addProduct":
         return <AddProduct />;
       case "orderDetails":
-        return <AddProduct />;
+        return <AdminOrders />;
       case "customerDetails":
         return <AddProduct />;
       default:

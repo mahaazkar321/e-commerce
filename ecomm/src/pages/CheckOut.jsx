@@ -106,14 +106,14 @@ const CheckOut = () => {
             <span>
               {item.name} x {item.quantity}
             </span>
-            <span className="price">${item.price * item.quantity}</span>
+            <span className="price">Rs.{item.price * item.quantity}</span>
           </div>
         ))}
 
         <div className="summary-totals">
           <div>
             <span>Subtotal:</span>
-            <span>${subtotal}</span>
+            <span>Rs. {subtotal}</span>
           </div>
           <div>
             <span>Shipping:</span>
@@ -121,7 +121,7 @@ const CheckOut = () => {
           </div>
           <div className="total">
             <span>Total:</span>
-            <span>${subtotal}</span>
+            <span>RS. {subtotal}</span>
           </div>
         </div>
 
