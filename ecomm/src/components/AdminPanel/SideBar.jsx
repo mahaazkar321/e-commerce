@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AddProduct from "./AddProd";
+import CustomerDetails from "./CustomerDetails";
 
 
 const SideBar = () => {
@@ -12,7 +13,7 @@ const SideBar = () => {
       case "orderDetails":
         return <AddProduct />;
       case "customerDetails":
-        return <AddProduct />;
+        return <CustomerDetails />;
       default:
         return <AddProduct />;
     }
