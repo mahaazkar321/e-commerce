@@ -45,3 +45,58 @@ router.put("/orders/:id", authMiddleware, adminMiddleware, async (req, res) => {
 });
 
 module.exports = router;
+
+
+
+
+
+
+// const express = require("express");
+// const router = express.Router();
+// const Order = require("../models/Order"); 
+
+// // 📌 Get all orders (no login required)
+// router.get("/", async (req, res) => {
+//   try {
+//     const orders = await Order.find()
+//       .populate("user", "name email")
+//       .sort({ createdAt: -1 });
+
+//     res.json(orders);
+//   } catch (err) {
+//     console.error("Fetch orders error:", err.message);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// });
+
+// // 📌 Update order status (no login required)
+// router.put("/:id", async (req, res) => {
+//   try {
+//     const { status } = req.body;
+//     const order = await Order.findByIdAndUpdate(
+//       req.params.id,
+//       { status },
+//       { new: true }
+//     );
+
+//     if (!order) return res.status(404).json({ message: "Order not found" });
+//     res.json(order);
+//   } catch (err) {
+//     console.error("Update error:", err.message);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// });
+
+// // 📌 Delete order (optional, no login required)
+// router.delete("/:id", async (req, res) => {
+//   try {
+//     const order = await Order.findByIdAndDelete(req.params.id);
+//     if (!order) return res.status(404).json({ message: "Order not found" });
+//     res.json({ message: "Order deleted successfully" });
+//   } catch (err) {
+//     console.error("Delete error:", err.message);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// });
+
+// module.exports = router;
