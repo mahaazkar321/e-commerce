@@ -34,6 +34,18 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Hardcoded admin credentials check
+    if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+      const adminToken = jwt.sign({ userId: 'admin', isAdmin: true }, process.env.JWT_SECRET, {
+        expiresIn: '1h',
+      });
+      return res.status(200).json({ 
+        message: 'Admin login successful', 
+        token: adminToken,
+        isAdmin: true 
+      });
+    }
+
     const user = await User.findOne({ email });
     if (!user)
       return res.status(400).json({ message: 'Invalid email or password' });
@@ -42,11 +54,15 @@ router.post('/login', async (req, res) => {
     if (!isMatch)
       return res.status(400).json({ message: 'Invalid email or password' });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id, isAdmin: false }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     });
 
-    res.status(200).json({ message: 'Login successful', token });
+    res.status(200).json({ 
+      message: 'Login successful', 
+      token,
+      isAdmin: false 
+    });
   } catch (err) {
     console.error('Login error:', err.message);
     res.status(500).json({ message: 'Server error' });
