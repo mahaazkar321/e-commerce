@@ -25,8 +25,8 @@
   const BestSelling = require('./routes/BestSellingRoute');
   const FlashSales = require('./routes/FlashSalesRoute');
   const AllProductsRoutes = require('./routes/AllProductsRoute');
-const orderRoutes = require('./routes/orderRoutes');
-
+  const orderRoutes = require('./routes/orderRoutes');
+    const productRoutes = require('./routes/AddProdRoute');
   // ✅ API Endpoints
   const cartRoutes = require('./routes/cart');
   const wishlistRoutes = require('./routes/wishlist');
@@ -47,7 +47,7 @@ const orderRoutes = require('./routes/orderRoutes');
   app.use('/api/flash-sales', FlashSales);
   app.use('/api/all-products', AllProductsRoutes);
   app.use('/api/search', searchRoutes);
-  const productRoutes = require('./routes/AddProdRoute');
+  app.use('/api/orders', orderRoutes);
   app.use('/api/products', productRoutes);
   app.use('/api/auth', authRoutes); // Signup/Login routes
   app.listen(PORT, () => {
