@@ -1,4 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+import ishq from '../../assets/img/Ishq.webp'
 const NewArrival = () => {
+  const navigate = useNavigate();
+
+  const handleShopNow = (categoryName) => {
+    navigate(`/category/${categoryName}`);
+  };
+
   return (
     <div style={{
       fontFamily: "'Arial', sans-serif",
@@ -23,63 +31,70 @@ const NewArrival = () => {
         marginBottom: '20px'
       }}>
         {/* PlayStation Card - Large Left Card */}
-<div style={{
-  backgroundColor: '#fff',
-  borderRadius: '8px',
-  overflow: 'hidden',
-  boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-  position: 'relative',
-  height: '400px',
-  display: 'flex',
-  flexDirection: 'column'
-}}>
-  <img 
-    src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
-    alt="PlayStation 5"
-    style={{
-      width: '100%',
-      height: '60%',
-      objectFit: 'cover'
-    }}
-  />
-  <div style={{
-    padding: '20px',
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  }}>
-    <div>
-      <h2 style={{
-        fontSize: '22px',
-        fontWeight: 'bold',
-        marginBottom: '10px',
-        color: '#333'
-      }}>PlayStation 5</h2>
-      <p style={{
-        fontSize: '16px',
-        color: '#666',
-        marginBottom: '20px'
-      }}>Black and White versions of the PS5 coming out on sale.</p>
-    </div>
-    <button style={{
-      backgroundColor: '#000',
-      color: '#fff',
-      border: 'none',
-      padding: '12px 24px',
-      borderRadius: '4px',
-      cursor: 'pointer',
-      fontWeight: 'bold',
-      fontSize: '16px',
-      alignSelf: 'flex-start',
-      transition: 'all 0.3s ease',
-      ':hover': {
-        backgroundColor: '#333',
-        transform: 'translateY(-2px)'
-      }
-    }}>Shop Now</button>
-  </div>
-</div>
+        <div style={{
+          backgroundColor: '#fff',
+          borderRadius: '8px',
+          overflow: 'hidden',
+          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+          position: 'relative',
+          height: '400px',
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+          <img 
+            src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+            alt="PlayStation 5"
+            style={{
+              width: '100%',
+              height: '60%',
+              objectFit: 'cover'
+            }}
+          />
+          <div style={{
+            padding: '20px',
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between'
+          }}>
+            <div>
+              <h2 style={{
+                fontSize: '22px',
+                fontWeight: 'bold',
+                marginBottom: '10px',
+                color: '#333'
+              }}>PlayStation 5</h2>
+              <p style={{
+                fontSize: '16px',
+                color: '#666',
+                marginBottom: '20px'
+              }}>Black and White versions of the PS5 coming out on sale.</p>
+            </div>
+            <button 
+              onClick={() => handleShopNow('sports-and-outdoor')}
+              style={{
+                backgroundColor: '#000',
+                color: '#fff',
+                border: 'none',
+                padding: '12px 24px',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+                fontSize: '16px',
+                alignSelf: 'flex-start',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.backgroundColor = '#333';
+                e.target.style.transform = 'translateY(-2px)';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.backgroundColor = '#000';
+                e.target.style.transform = 'translateY(0)';
+              }}
+            >Shop Now</button>
+          </div>
+        </div>
 
         {/* Right Side - Two Small Cards Stacked */}
         <div style={{
@@ -122,17 +137,20 @@ const NewArrival = () => {
                 color: '#666',
                 marginBottom: '15px'
               }}>Featured women collections that give you another vibe.</p>
-              <button style={{
-                backgroundColor: '#000',
-                color: '#fff',
-                border: 'none',
-                padding: '8px 15px',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                fontSize: '14px',
-                alignSelf: 'flex-start'
-              }}>Shop Now</button>
+              <button 
+                onClick={() => handleShopNow('woman-fashion')}
+                style={{
+                  backgroundColor: '#000',
+                  color: '#fff',
+                  border: 'none',
+                  padding: '8px 15px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  fontSize: '14px',
+                  alignSelf: 'flex-start'
+                }}
+              >Shop Now</button>
             </div>
           </div>
 
@@ -165,23 +183,26 @@ const NewArrival = () => {
                 fontWeight: 'bold',
                 marginBottom: '10px',
                 color: '#333'
-              }}>Speakers</h2>
+              }}>Electronics</h2>
               <p style={{
                 fontSize: '14px',
                 color: '#666',
                 marginBottom: '15px'
               }}>Amazon wireless speakers at Shop Now</p>
-              <button style={{
-                backgroundColor: '#000',
-                color: '#fff',
-                border: 'none',
-                padding: '8px 15px',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                fontWeight: 'bold',
-                fontSize: '14px',
-                alignSelf: 'flex-start'
-              }}>Shop Now</button>
+              <button 
+                onClick={() => handleShopNow('appliance-electronics')}
+                style={{
+                  backgroundColor: '#000',
+                  color: '#fff',
+                  border: 'none',
+                  padding: '8px 15px',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  fontSize: '14px',
+                  alignSelf: 'flex-start'
+                }}
+              >Shop Now</button>
             </div>
           </div>
         </div>
@@ -198,7 +219,7 @@ const NewArrival = () => {
         height: '300px'
       }}>
         <img 
-          src="https://images.unsplash.com/photo-1594035910387-fea47794261f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+          src={ishq}
           alt="GUCCI Perfume"
           style={{
             width: '40%',
@@ -217,24 +238,27 @@ const NewArrival = () => {
             fontWeight: 'bold',
             marginBottom: '15px',
             color: '#333'
-          }}>Perfume</h2>
+          }}>Ishq</h2>
           <p style={{
             fontSize: '18px',
             color: '#666',
             marginBottom: '25px',
             fontWeight: 'bold'
-          }}>GUCCI INTENSE TOP</p>
-          <button style={{
-            backgroundColor: '#000',
-            color: '#fff',
-            border: 'none',
-            padding: '12px 25px',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            fontSize: '16px',
-            alignSelf: 'flex-start'
-          }}>Shop Now</button>
+          }}>Saeed Ghani</p>
+          <button 
+            onClick={() => handleShopNow('woman-fashion/68a2e52f89fe424363a1cff3')}
+            style={{
+              backgroundColor: '#000',
+              color: '#fff',
+              border: 'none',
+              padding: '12px 25px',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              fontWeight: 'bold',
+              fontSize: '16px',
+              alignSelf: 'flex-start'
+            }}
+          >Shop Now</button>
         </div>
       </div>
 
@@ -309,7 +333,7 @@ const NewArrival = () => {
           }}>MONEY BACK GUARANTEE</h3>
           <p style={{
             fontSize: '14px',
-            color: '#666'
+            color: '##666'
           }}>Return within 30 days</p>
         </div>
       </div>
