@@ -1,3 +1,4 @@
+
   const express = require('express');
   const cors = require('cors');
   const path = require('path');
@@ -24,7 +25,7 @@
   const BestSelling = require('./routes/BestSellingRoute');
   const FlashSales = require('./routes/FlashSalesRoute');
   const AllProductsRoutes = require('./routes/AllProductsRoute');
-
+const orderRoutes = require('./routes/orderRoutes');
 
   // ✅ API Endpoints
   const cartRoutes = require('./routes/cart');
@@ -52,3 +53,4 @@
   app.listen(PORT, () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`);
   });
+
