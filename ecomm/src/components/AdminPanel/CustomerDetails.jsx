@@ -4,12 +4,19 @@ import { getOrders } from "./orderService";
 const CustomerDetails = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false); // You need to set this based on user role
 
   useEffect(() => {
+    // Check if user is admin (you'll need to implement this logic)
+    // For example, from user data in localStorage or context
+    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    const adminStatus = userData.isAdmin || false;
+    setIsAdmin(adminStatus);
+    
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const data = await getOrders();
+        const data = await getOrders(adminStatus);
         console.log("Fetched orders data:", data);
         
         if (Array.isArray(data)) {
@@ -22,6 +29,10 @@ const CustomerDetails = () => {
         setOrders(data);
       } catch (err) {
         console.error("Error fetching orders", err);
+        if (err.message === "Admin access required") {
+          // Handle unauthorized access
+          alert("You need admin privileges to view this page");
+        }
       } finally {
         setLoading(false);
       }
@@ -35,7 +46,9 @@ const CustomerDetails = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">Customer Billing Details</h2>
+      <h2 className="text-xl font-bold mb-4">
+        {isAdmin ? "All Customer Billing Details" : "Your Order History"}
+      </h2>
 
       {!Array.isArray(orders) || orders.length === 0 ? (
         <p>No orders found.</p>
@@ -51,6 +64,7 @@ const CustomerDetails = () => {
                 <th className="py-2 px-5 border-b text-left">City</th>
                 <th className="py-2 px-5 border-b text-left">Phone</th>
                 <th className="py-2 px-5 border-b text-left">Email</th>
+                {isAdmin && <th className="py-2 px-5 border-b text-left">Customer</th>}
               </tr>
             </thead>
             <tbody>
@@ -84,6 +98,11 @@ const CustomerDetails = () => {
                   <td className="py-2 px-5 border-b">
                     {order.billingDetails?.email || "N/A"}
                   </td>
+                  {isAdmin && (
+                    <td className="py-2 px-5 border-b">
+                      {order.user?.name || "Guest"} ({order.user?.email || "N/A"})
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

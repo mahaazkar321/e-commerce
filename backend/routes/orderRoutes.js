@@ -46,9 +46,12 @@ router.put("/:id", async (req, res) => {
 
 // ✅ Get ALL orders
 // 🔧 Optional: you may want to restrict this route to admin users in real applications
-router.get("/all", async (req, res) => {
+// ✅ Get ALL orders (Admin only)
+router.get("/all", authMiddleware, async (req, res) => {
   try {
-    const orders = await Order.find().sort({ createdAt: -1 });
+    const orders = await Order.find()
+      .populate("user", "name email") // Optional: populate user details
+      .sort({ createdAt: -1 });
     res.json(orders);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });

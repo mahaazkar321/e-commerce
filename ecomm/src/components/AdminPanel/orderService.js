@@ -1,6 +1,4 @@
-import axios from "axios";
-
-export const getOrders = async () => {
+export const getOrders = async (isAdmin = false) => {
   try {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -8,12 +6,17 @@ export const getOrders = async () => {
       throw new Error("Authentication required");
     }
 
-    const response = await axios.get("http://localhost:5000/api/orders", {
+    // Use different endpoint based on user role
+    const endpoint = isAdmin 
+      ? "http://localhost:5000/api/orders/all" 
+      : "http://localhost:5000/api/orders";
+
+    const response = await axios.get(endpoint, {
       headers: { 
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json"
       },
-      timeout: 10000 // 10 second timeout
+      timeout: 10000
     });
 
     console.log("API Response status:", response.status);
@@ -37,9 +40,11 @@ export const getOrders = async () => {
     });
     
     if (error.response?.status === 401) {
-      // Token expired or invalid
       localStorage.removeItem("token");
       window.location.href = "/login";
+    } else if (error.response?.status === 403) {
+      console.error("Access denied - Admin privileges required");
+      throw new Error("Admin access required");
     }
     
     throw error;
