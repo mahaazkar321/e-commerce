@@ -20,7 +20,7 @@ const ProductDetails = () => {
         setProduct(res.data);
       } catch (err) {
         console.error('Failed to fetch product details:', err);
-        setError('Failed to load product. Please try again later.');
+        setError('Failed to load product.Please try again later.');
       } finally {
         setLoading(false);
       }
