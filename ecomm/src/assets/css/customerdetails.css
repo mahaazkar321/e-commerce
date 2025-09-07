@@ -210,8 +210,9 @@
   background-color: #d4edda;
   color: #155724;
 }
-
-.status-processing {
+.status-processing { background-color: #cfc4d8; color: #8030a3; }
+.status-delivered { background-color: #dcfce7; color: #166534; }
+.status-pending {
   background-color: #fff3cd;
   color: #856404;
 }

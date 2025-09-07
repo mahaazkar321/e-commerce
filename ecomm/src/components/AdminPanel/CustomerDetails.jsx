@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import '../../assets/css/customerdetails.css';
+import "../../assets/css/customerdetails.css";
 
 const CustomerDetails = () => {
   const [customers, setCustomers] = useState([]);
@@ -11,27 +11,29 @@ const CustomerDetails = () => {
   const fetchCustomers = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/orders/all");
-      
+
       // Extract unique customers based on email
       const customerMap = new Map();
-      
-      res.data.forEach(order => {
+
+      res.data.forEach((order) => {
         if (order.billingDetails && order.billingDetails.email) {
           const email = order.billingDetails.email;
           if (!customerMap.has(email)) {
             customerMap.set(email, {
               ...order.billingDetails,
-              orders: [{
-                id: order._id,
-                orderNumber: order.orderNumber,
-                totalAmount: order.totalAmount,
-                createdAt: order.createdAt,
-                status: order.status || "Processing" // Default status if not provided
-              }],
+              orders: [
+                {
+                  id: order._id,
+                  orderNumber: order.orderNumber,
+                  totalAmount: order.totalAmount,
+                  createdAt: order.createdAt,
+                  status: order.status || "Processing", // Default status
+                },
+              ],
               orderCount: 1,
               totalSpent: order.totalAmount,
               firstOrder: order.createdAt,
-              lastOrder: order.createdAt
+              lastOrder: order.createdAt,
             });
           } else {
             const existingCustomer = customerMap.get(email);
@@ -42,23 +44,24 @@ const CustomerDetails = () => {
                 orderNumber: order.orderNumber,
                 totalAmount: order.totalAmount,
                 createdAt: order.createdAt,
-                status: order.status || "Processing" // Default status if not provided
-              }
+                status: order.status || "Processing",
+              },
             ];
-            
+
             customerMap.set(email, {
               ...existingCustomer,
               orders: updatedOrders,
               orderCount: existingCustomer.orderCount + 1,
               totalSpent: existingCustomer.totalSpent + order.totalAmount,
-              lastOrder: order.createdAt > existingCustomer.lastOrder 
-                ? order.createdAt 
-                : existingCustomer.lastOrder
+              lastOrder:
+                order.createdAt > existingCustomer.lastOrder
+                  ? order.createdAt
+                  : existingCustomer.lastOrder,
             });
           }
         }
       });
-      
+
       setCustomers(Array.from(customerMap.values()));
     } catch (err) {
       console.error("Error fetching customers:", err.response?.data || err.message);
@@ -71,31 +74,48 @@ const CustomerDetails = () => {
     fetchCustomers();
   }, []);
 
-  // Filter customers based on search term
-  const filteredCustomers = customers.filter(customer => {
+  // ✅ Fixed + extended search
+  const filteredCustomers = customers.filter((customer) => {
+    const lowerTerm = searchTerm.toLowerCase();
+
     return (
-      customer.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      customer.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      customer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      customer.phone.toLowerCase().includes(searchTerm.toLowerCase())
+      (customer.firstName?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.lastName?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.email?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.phone?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.companyName?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.streetAddress?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.city?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.state?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.zipCode?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.country?.toLowerCase() || "").includes(lowerTerm) ||
+      (customer.orders?.some((order) =>
+        (order.orderNumber?.toString() || "").toLowerCase().includes(lowerTerm)
+      ))
     );
   });
 
   // Function to determine status class for styling
-  const getStatusClass = (status) => {
-    switch (status.toLowerCase()) {
-      case 'completed':
-        return 'status-completed';
-      case 'processing':
-        return 'status-processing';
-      case 'shipped':
-        return 'status-shipped';
-      case 'cancelled':
-        return 'status-cancelled';
-      default:
-        return 'status-processing';
-    }
-  };
+ const getStatusClass = (status) => {
+  switch (status.toLowerCase()) {
+   
+    case "processing":
+      return "status-processing";
+    case "shipped":
+      return "status-shipped";
+    case "cancelled":
+      return "status-cancelled";
+    case "pending":
+      return "status-pending";
+   
+    case "delivered":
+      return "status-delivered";
+   
+    default:
+      return "status-default";
+  }
+};
+
 
   if (loading) {
     return (
@@ -144,7 +164,10 @@ const CustomerDetails = () => {
           <div className="stat-info">
             <span className="stat-label">Total Revenue</span>
             <span className="stat-value">
-              ${customers.reduce((total, customer) => total + customer.totalSpent, 0).toFixed(2)}
+              $
+              {customers
+                .reduce((total, customer) => total + customer.totalSpent, 0)
+                .toFixed(2)}
             </span>
           </div>
         </div>
@@ -163,7 +186,7 @@ const CustomerDetails = () => {
         </div>
       </div>
 
-      {/* Customers Table with Horizontal Scroll */}
+      {/* Customers Table with Scroll */}
       <div className="table-scroll-container">
         <div className="customers-table-container">
           <table className="customers-table">
@@ -176,8 +199,8 @@ const CustomerDetails = () => {
                 <th>Orders</th>
                 <th>Status</th>
                 <th>Total Spent</th>
-                <th>First Order</th>
-                <th>Last Order</th>
+                {/* <th>First Order</th>
+                <th>Last Order</th> */}
               </tr>
             </thead>
             <tbody>
@@ -207,12 +230,17 @@ const CustomerDetails = () => {
                     </td>
                     <td>
                       <div className="orders-container">
-                        <div className="order-count-badge">{customer.orderCount} orders</div>
+                        <div className="order-count-badge">
+                          {customer.orderCount} orders
+                        </div>
                         <div className="order-ids-list">
                           {customer.orders.map((order, idx) => (
                             <div key={idx} className="order-id-item">
-                              <div className="order-id">{order.id}</div>
-                              <div className="order-number">#{order.orderNumber}</div>
+                              <div className="order-id">#{order.id.slice(-8)}</div>
+                            <div className="order-date">
+                        {new Date(customer.firstOrder).toLocaleDateString()}
+                      </div>
+                              {/* <div className="order-number">#{order.orderNumber}</div> */}
                             </div>
                           ))}
                         </div>
@@ -221,16 +249,21 @@ const CustomerDetails = () => {
                     <td>
                       <div className="order-status-list">
                         {customer.orders.map((order, idx) => (
-                          <div key={idx} className={`status-badge ${getStatusClass(order.status)}`}>
+                          <div
+                            key={idx}
+                            className={`status-badge ${getStatusClass(order.status)} m-3`}
+                          >
                             {order.status}
                           </div>
                         ))}
                       </div>
                     </td>
                     <td>
-                      <div className="total-spent">${customer.totalSpent.toFixed(2)}</div>
+                      <div className="total-spent">
+                        ${customer.totalSpent.toFixed(2)}
+                      </div>
                     </td>
-                    <td>
+                    {/* <td>
                       <div className="order-date">
                         {new Date(customer.firstOrder).toLocaleDateString()}
                       </div>
@@ -239,7 +272,7 @@ const CustomerDetails = () => {
                       <div className="order-date">
                         {new Date(customer.lastOrder).toLocaleDateString()}
                       </div>
-                    </td>
+                    </td> */}
                   </tr>
                 ))
               ) : (
